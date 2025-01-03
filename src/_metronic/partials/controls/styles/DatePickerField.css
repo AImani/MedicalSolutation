@@ -1,0 +1,24 @@
+.DatePicker {
+  position: relative;
+  display: inline-block;
+  z-index: 0;
+}
+
+.btn-clear {
+  position: absolute;
+  bottom: calc(50% - 15px);
+  left: 0.7rem;
+}
+
+.DatePicker {
+	z-index: initial !important;
+}
+
+.DatePicker__calendarContainer {
+	z-index: 100;
+}
+
+.rmdp-container input:focus, .rmdp-container input:active {
+  border: none !important;
+  outline: none;
+}

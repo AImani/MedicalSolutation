@@ -1,0 +1,40 @@
+:root {
+  --bs-success-rgb: 1, 208, 206 !important;
+  --bs-gray: #65676a;
+  --base-color: #01d0ce;
+  --black-2: #00000005;
+  --aquamarine: #01d0ce;
+  --turquoise: #00b8b6;
+  --bs-border-radius: 0.375rem;
+  --text-black: #4b5675;
+  --text-gold: #ffa500;
+}
+
+.text-gold {
+  color: var(--text-gold) !important;
+}
+.text-gray {
+  color: var(--bs-gray) !important;
+}
+
+@media (min-width: 992px) {
+  .app-content {
+    padding-top: 0 !important;
+  }
+}
+
+.ltr, .dir-ltr {
+  direction: ltr !important;
+}
+
+.rtl, .dir-rtl {
+  direction: rtl !important;
+}
+
+.form-floating textarea.form-control {
+  height: unset;
+}
+
+.was-validated .form-control:invalid, .form-control.is-invalid {
+  background: none !important;
+}

@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "useDefineForClassFields": true,
+    "lib": ["ES2021", "es6", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "Bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "baseUrl": ".",
+    "strict": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    
+    "paths": {
+      "@/*": ["./src/*"],
+      "@helpers/*": ["src/_metronic/helpers/*"],
+      "react": [ "./node_modules/@types/react" ]
+    }
+  },
+  "include": ["src", "src/_metronic/i18n/i18n.ts"],
+  "references": [{ "path": "./tsconfig.node.json" }],
+}

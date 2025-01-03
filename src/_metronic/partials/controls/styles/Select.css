@@ -1,0 +1,34 @@
+.select-container.is-invalid > div {
+  border-color: #f1416c;
+  background-repeat: no-repeat;
+  background-position: left calc(0.375em + 0.375rem) center;
+  background-size: calc(0.75em + 0.75rem) calc(0.75em + 0.75rem);
+}
+
+.input-group > .select-container > div {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  min-width: 100px;
+}
+
+.form-floating > .form-control:focus,
+.form-floating > .form-control:not(:placeholder-shown),
+.form-floating > .form-control-plaintext:focus,
+.form-floating > .form-control-plaintext:not(:placeholder-shown) {
+  padding-top: 1.85rem !important;
+  padding-bottom: 0.625rem !important;
+}
+
+.form-floating .react-select__value-container {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.form-floating .react-select__control {
+  min-height: unset;
+  font-size: 0.95rem !important;
+}
+
+.form-floating .react-select-styled .react-select__control--is-focused {
+  background-color: white !important;
+}
