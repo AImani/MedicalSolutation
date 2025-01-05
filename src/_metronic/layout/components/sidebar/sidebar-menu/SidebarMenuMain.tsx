@@ -16,7 +16,7 @@ console.log("t('Modules.AppointmentRequest') > ", t('Modules.AppointmentRequest'
       />
       <SidebarMenuItem to='/appointment-requests' title={t('Modules.AppointmentRequest')} hasBullet/>
       <SidebarMenuItem to='/appointment-requests' title={t('Modules.Appointments')} hasBullet/>
-      <SidebarMenuItem to='/appointment-requests' title={t('Modules.Patients')} hasBullet/>
+      <SidebarMenuItem to='/patients' title={t('Modules.Patients')} hasBullet/>
       <SidebarMenuItem to='/doctors' title={t('Modules.Doctors')} hasBullet/>
       <SidebarMenuItem to='/sms-panel' title={t('Modules.SMSPanel')} hasBullet/>
 
