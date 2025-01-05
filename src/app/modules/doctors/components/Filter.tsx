@@ -5,13 +5,10 @@ import { Card, Row, Col, InputGroup, Button, Form } from "react-bootstrap"
 import { useFormContext } from "react-hook-form"
 import { useStatuses } from "../services/BasicInfoService"
 import { useQueryClient } from "@tanstack/react-query"
-import { RejectConfirm } from "./RejectConfirm"
-import { ApproveConfirm } from "./ApproveConfirm"
 import { useEffect, useMemo, useState } from "react"
 import { useListView, useQueryRequest } from "@/_metronic/partials/controls/Table"
 import usePermission from '../../auth/permissions/hook';
 import toast from "react-hot-toast"
-import { WaitingForApproveConfirm } from "./WaitingForApproveConfirm"
 
 export const CartableFilter = () => {
     const methods = useFormContext();
@@ -103,9 +100,6 @@ export const CartableFilter = () => {
                     </Card.Body>
                 </Form>
             </Card>
-            <RejectConfirm confirm={confirmReject} setConfirm={setConfirmReject} />
-            <ApproveConfirm confirm={confirmApprove} setConfirm={setConfirmApprove} />
-            <WaitingForApproveConfirm confirm={confirmWaitingForApprove} setConfirm={setConfirmWaitingForApprove} />
         </>
     )
 }

@@ -87,7 +87,7 @@ export const Doctors = () => {
 
     return (
         <>
-            <PageTitle>{t('Financial.Cartable')}</PageTitle>
+            <PageTitle>{t('Modules.Doctors')}</PageTitle>
             <FormProvider {...methods}>
                 <QueryRequestProvider
                     preState={{
