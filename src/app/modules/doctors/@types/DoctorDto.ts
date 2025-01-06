@@ -26,6 +26,11 @@ export interface CreateDoctorDto {
 }
 
 export interface DoctorRequestDto extends BaseRequest {
+    PhoneNumber: string | null;
+    FirstName: string | null;
+    LastName: string | null;
+    MedicalSpecialtyId: number | null;
+    DoctorStatusId: number | null;
 }
 
 export interface PatientGridDto {

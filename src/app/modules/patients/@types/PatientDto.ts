@@ -2,6 +2,15 @@ import { AddressDto, CreateMedicalDocumentDto } from "../../basic-info/@types";
 import { BaseRequest } from "../../general/@types";
 
 export interface PatientRequestDto extends BaseRequest {
+    PhoneNo: string | null;
+    FirstName: string | null;
+    LastName: string | null;
+    IntroductionChannel: string | null;
+    PatientStatusId: number | null;
+    MaritalStatusId: number | null;
+    EducationLevelId: number | null;
+    Occupation: string | null;
+    InsuranceCompanyId: number | null;
 }
 
 export interface PatientGridDto {

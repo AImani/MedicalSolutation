@@ -5,7 +5,7 @@ import { DoctorRequestDto } from "../@types";
 import { DoctorGridDto } from "../@types";
 
 const getGetAll = async (dto: DoctorRequestDto) => {
-    const response = await axios.get<PaginateResult<DoctorGridDto>>('/Doctor').then(response => response.data);
+    const response = await axios.post<PaginateResult<DoctorGridDto>>('/Doctor', dto).then(response => response.data);
     return response;
 }
 
