@@ -7,6 +7,9 @@ import { getCSSVariableValue } from '../../_metronic/assets/ts/_utils'
 import { WithChildren } from '../../_metronic/helpers'
 import DoctorsRoutes from '../modules/doctors/routes'
 import PatientsRoutes from '../modules/patients/routes'
+import { AppointmentRequests } from '../modules/appointment-requests/components'
+import { Appointments } from '../modules/appointments/components/Appointments'
+import { InsuranceCompanies } from '../modules/insurance-companies/components/InsuranceCompanies'
 
 const PrivateRoutes = () => {
   return (
@@ -24,6 +27,18 @@ const PrivateRoutes = () => {
         <Route
           path='patients/*'
           element={<PatientsRoutes />}
+        />
+        <Route
+          path='appointment-requests/*'
+          element={<AppointmentRequests />}
+        />
+        <Route
+          path='insurance-companies/*'
+          element={<InsuranceCompanies />}
+        />
+        <Route
+          path='appointments/*'
+          element={<Appointments />}
         />
         {/* Page Not Found */}
         <Route path='*' element={<Navigate to='/error/404' />} />
