@@ -74,7 +74,7 @@ export const AppointmentRequests = () => {
 
     return (
         <>
-            <PageTitle>{t('Modules.InsuranceCompanies')}</PageTitle>
+            <PageTitle>{t('Modules.AppointmentRequest')}</PageTitle>
             <FormProvider {...methods}>
                 <QueryRequestProvider
                     preState={{

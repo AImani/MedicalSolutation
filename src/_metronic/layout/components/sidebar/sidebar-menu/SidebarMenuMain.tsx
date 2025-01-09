@@ -10,22 +10,28 @@ console.log("t('Modules.AppointmentRequest') > ", t('Modules.AppointmentRequest'
     <>
       <SidebarMenuItem
         to='/dashboard'
-        icon='element-11'
         title={t('MENU.DASHBOARD')}
-        fontIcon='bi-app-indicator'
+        fontIcon='table-columns'
       />
-      <SidebarMenuItem to='/appointment-requests' title={t('Modules.AppointmentRequest')} hasBullet/>
-      <SidebarMenuItem to='/appointments' title={t('Modules.Appointments')} hasBullet/>
-      <SidebarMenuItem to='/patients' title={t('Modules.Patients')} hasBullet/>
-      <SidebarMenuItem to='/doctors' title={t('Modules.Doctors')} hasBullet/>
-      <SidebarMenuItem to='/insurance-companies' title={t('Modules.InsuranceCompanies')} hasBullet/>
-      <SidebarMenuItem to='/sms-panel' title={t('Modules.SMSPanel')} hasBullet/>
+      <SidebarMenuItem to='/appointment-requests' title={t('Modules.AppointmentRequest')} fontIcon='bell'/>
+      <SidebarMenuItem to='/appointments' title={t('Modules.Appointments')} fontIcon='calendar-check'/>
+      <SidebarMenuItem to='/patients' title={t('Modules.Patients')} fontIcon='user'/>
+      <SidebarMenuItem to='/doctors' title={t('Modules.Doctors')} fontIcon='user-doctor'/>
+      <SidebarMenuItem to='/insurance-companies' title={t('Modules.InsuranceCompanies')} fontIcon='hospital'/>
+      
+      <SidebarMenuItemWithSub
+        to='/sms-panel'
+        title={t('Modules.SMSPanel')}
+        fontIcon='message'
+      >
+        <SidebarMenuItem to='/sms-panel/messages' title={t('Modules.Messages')} fontIcon='sms'/>
+        <SidebarMenuItem to='/sms-panel/groups' title={t('Modules.Groups')} fontIcon='users'/>
+      </SidebarMenuItemWithSub>
 
       <SidebarMenuItemWithSub
         to='/basic-infos'
         title={t('Modules.BasicInfo')}
-        icon='information'
-        fontIcon='bi-information'
+        fontIcon='heart-pulse'
       >
         <SidebarMenuItem to='/basic-infos/appointment-purpose' title={t('BasicInfo.AppointmentPurpose')} hasBullet={true}  />
         <SidebarMenuItem to='/basic-infos/appointment-request-status' title={t('BasicInfo.AppointmentRequestStatus')} hasBullet={true}  />

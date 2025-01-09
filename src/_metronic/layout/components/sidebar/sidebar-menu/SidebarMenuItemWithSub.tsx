@@ -49,7 +49,7 @@ const SidebarMenuItemWithSub: React.FC<Props & WithChildren> = ({
               </span>
             )}
             {fontIcon && app?.sidebar?.default?.menu?.iconType === 'font' && (
-              <i className={clsx('bi fs-3', fontIcon)}></i>
+              <i className={clsx('fas fs-3 me-2 ', 'fa-' + fontIcon )}></i>
             )}
             <span className='menu-title'>{title}</span>
             <span className='menu-arrow'></span>

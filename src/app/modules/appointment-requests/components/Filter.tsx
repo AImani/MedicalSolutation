@@ -12,54 +12,16 @@ import toast from "react-hot-toast"
 
 export const CartableFilter = () => {
     const methods = useFormContext();
-    const canWaitingForApprove = usePermission([{ ctrl: 'FinancialTransfers', action: 'WaitingForApprove' }]);
-    const canApprove = usePermission([{ ctrl: 'FinancialTransfers', action: 'Approve' }]);
-    const canReject = usePermission([{ ctrl: 'FinancialTransfers', action: 'Reject' }]);
 
     const { data: statuses } = useStatuses();
-    const [selectableStatuses, setSelectableStatuses] = useState<any[]>([]);
-    useEffect(() => {
-        setSelectableStatuses([]);
-        if (canWaitingForApprove || canApprove || canReject)
-            setSelectableStatuses([{ value: null, label: 'همه' }]);
-        if (canWaitingForApprove)
-            setSelectableStatuses((prev) => [...prev, { value: 1, label: 'ثبت اولیه' }]);
-        if (canApprove || canReject)
-            setSelectableStatuses((prev) => [...prev, { value: 2, label: 'در انتظار تایید' }]);
-    }, [statuses]);
-
     const queryClient = useQueryClient();
     const queryRequest = useQueryRequest();
-    const { state, updateState } = useMemo(() => ({ state: queryRequest?.state, updateState: queryRequest?.updateState }), [queryRequest]);
-    const listView = useListView();
-    const [confirmReject, setConfirmReject] = useState<boolean>(false);
-    const [confirmApprove, setConfirmApprove] = useState<boolean>(false);
-    const [confirmWaitingForApprove, setConfirmWaitingForApprove] = useState<boolean>(false);
-
-    const showReject = () => {
-        if (listView?.selected.length == 0)
-            toast.error('درخواستی انتخاب نشده است.');
-        else
-            setConfirmReject(true)
-    };
-    const showApprove = () => {
-        if (listView?.selected.length == 0)
-            toast.error('درخواستی انتخاب نشده است.');
-        else
-            setConfirmApprove(true);
-    };
-    const showWaitingForApprove = () => {
-        if (listView?.selected.length == 0)
-            toast.error('درخواستی انتخاب نشده است.');
-        else
-            setConfirmWaitingForApprove(true);
-    };
 
     const onSubmit = methods.handleSubmit((values) => {
         methods.trigger(['ResponseFromDate', 'ResponseToDate'])
             .then((res) => {
                 queryClient.invalidateQueries({ predicate: (query) => query.queryKey[0] === 'FinancialTransfers' })
-                    .finally(() => res && !!updateState && updateState({ ...state, ...values }));
+                    // .finally(() => res && !!updateState && updateState({ ...state, ...values }));
             })
     })
 
@@ -72,7 +34,7 @@ export const CartableFilter = () => {
                             <Col md={6} lg={3} xl={2}>
                                 <SelectField
                                     name='StatusId'
-                                    options={selectableStatuses}
+                                    options={[]}
                                     label={t('Financial.Report.Succeeded')}
                                 />
                             </Col>
@@ -90,11 +52,6 @@ export const CartableFilter = () => {
                                         {t('Actions.Search')}
                                     </Button>
                                 </InputGroup>
-                            </Col>
-                            <Col xs={'auto'} className='pt-5 mt-2'>
-                                <Button type='button' variant='success' onClick={showApprove}>
-                                    <KTIcon iconName='plus-square' iconType='solid' className='fs-2 me-2' /> {t('Actions.Add')}
-                                </Button>
                             </Col>
                         </Row>
                     </Card.Body>

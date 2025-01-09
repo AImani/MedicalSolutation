@@ -30,6 +30,7 @@ const SidebarMenuItem: FC<Props & WithChildren> = ({
   const { config } = useLayout()
   const { app } = config
   let hasPermission: boolean = permissions ? usePermission(permissions) : true;
+console.log('app?.sidebar?.default?.menu?.iconType . ', app?.sidebar?.default?.menu?.iconType);
 
   return (
     <>
@@ -48,7 +49,7 @@ const SidebarMenuItem: FC<Props & WithChildren> = ({
               </span>
             )}
             {fontIcon && app?.sidebar?.default?.menu?.iconType === 'font' && (
-              <i className={clsx('bi fs-3', fontIcon)}></i>
+              <i className={clsx('fas fs-3 me-2 ', 'fa-' + fontIcon )}></i>
             )}
             <span className='menu-title'>{title}</span>
           </Link>

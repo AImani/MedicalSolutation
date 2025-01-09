@@ -3,8 +3,11 @@ import {useEffect} from 'react'
 import {Outlet, Link} from 'react-router-dom'
 import {toAbsoluteUrl} from '../../../_metronic/helpers'
 import { Toaster } from 'react-hot-toast'
+import { useTranslation } from 'react-i18next'
 
 const AuthLayout = () => {
+    const { t } = useTranslation();
+  
   useEffect(() => {
     const root = document.getElementById('root')
     if (root) {
@@ -59,7 +62,7 @@ const AuthLayout = () => {
 
           {/* begin::Title */}
           <h1 className='text-white fs-2qx fw-bolder text-center mb-7'>
-            سامانه مدیریت جامع ایران کارت
+            {t('App.Name')}
           </h1>
           {/* end::Title */}
 

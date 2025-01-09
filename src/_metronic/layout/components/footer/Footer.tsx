@@ -1,9 +1,12 @@
-import {useEffect} from 'react'
-import {ILayout, useLayout} from '../../core'
+import { useEffect } from 'react'
+import { ILayout, useLayout } from '../../core'
 import moment from 'jalali-moment'
+import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
-  const {config} = useLayout()
+  const { t } = useTranslation();
+
+  const { config } = useLayout()
   useEffect(() => {
     updateDOM(config)
   }, [config])
@@ -18,7 +21,7 @@ const Footer = () => {
           target='_blank'
           className='text-gray-800 text-hover-primary'
         >
-          ایران‌کارت
+          {t('App.Name')}
         </a>
       </div>
 
@@ -59,4 +62,4 @@ const updateDOM = (config: ILayout) => {
   }
 }
 
-export {Footer}
+export { Footer }
