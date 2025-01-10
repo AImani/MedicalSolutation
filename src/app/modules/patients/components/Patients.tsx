@@ -1,9 +1,9 @@
-import { Column } from 'react-table';
+import { Column, ColumnDef } from '@tanstack/react-table';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { Table } from '@/_metronic/partials/controls';
+import { Button, Table } from '@/_metronic/partials/controls';
 import { addDays } from '@/_metronic/helpers';
 import {
     ListViewProvider,
@@ -15,6 +15,9 @@ import { CartableFilter } from './Filter';
 import { ToWords } from 'to-words';
 import { PatientGridDto } from '../@types';
 import { usePatients } from '../services/PatientService';
+import Loader from '@/_metronic/partials/layout/loader';
+import { useMemo } from 'react';
+import { Link } from 'react-router-dom';
 
 export const Patients = () => {
     const { t } = useTranslation();
@@ -49,56 +52,75 @@ export const Patients = () => {
         resolver: yupResolver(validationSchema)
     });
 
-    const columns: ReadonlyArray<Column<PatientGridDto>> = [
-        {
-            Header: t('Patient.FirstName'),
-            accessor: 'FirstName'
-        },
-        {
-            Header: t('Patient.LastName'),
-            accessor: 'LastName'
-        },
-        {
-            Header: t('Patient.PhoneNo'),
-            accessor: 'PhoneNo',
-        },
-        {
-            Header: t('Patient.CellPhoneNo'),
-            accessor: 'CellPhoneNo',
-        },
-        {
-            Header: t('Patient.EmergencyPhoneNo'),
-            accessor: 'EmergencyPhoneNo',
-        },
-        {
-            Header: t('Patient.Email'),
-            accessor: 'Email',
-        },
-        {
-            Header: t('Patient.BirthDate'),
-            accessor: 'BirthDate'
-        },
-        {
-            Header: t('Patient.PatientStatusName'),
-            accessor: 'PatientStatusName',
-        },
-        {
-            Header: t('Patient.MaritalStatusName'),
-            accessor: 'MaritalStatusName',
-        },
-        {
-            Header: t('Patient.EducationLevelName'),
-            accessor: 'EducationLevelName',
-        },
-        {
-            Header: t('Patient.AddressLine'),
-            accessor: 'AddressLine',
-        },
-        {
-            Header: t('Patient.InsuranceCompanyName'),
-            accessor: 'InsuranceCompanyName',
-        }
-    ];
+    const columns = useMemo<ColumnDef<PatientGridDto, any>[]>(
+        () => [
+            {
+                header: () => t('Patient.FirstName'),
+                accessorKey: 'FirstName',
+            },
+            {
+                header: t('Patient.LastName'),
+                accessorKey: 'LastName'
+            },
+            {
+                header: t('Patient.PhoneNo'),
+                accessorKey: 'PhoneNo',
+            },
+            {
+                header: t('Patient.CellPhoneNo'),
+                accessorKey: 'CellPhoneNo',
+            },
+            {
+                header: t('Patient.EmergencyPhoneNo'),
+                accessorKey: 'EmergencyPhoneNo',
+            },
+            {
+                header: t('Patient.Email'),
+                accessorKey: 'Email',
+            },
+            {
+                header: t('Patient.BirthDate'),
+                accessorKey: 'BirthDate'
+            },
+            {
+                header: t('Patient.PatientStatusName'),
+                accessorKey: 'PatientStatusName',
+            },
+            {
+                header: t('Patient.MaritalStatusName'),
+                accessorKey: 'MaritalStatusName',
+            },
+            {
+                header: t('Patient.EducationLevelName'),
+                accessorKey: 'EducationLevelName',
+            },
+            {
+                header: t('Patient.AddressLine'),
+                accessorKey: 'AddressLine',
+            },
+            {
+                header: t('Patient.InsuranceCompanyName'),
+                accessorKey: 'InsuranceCompanyName',
+            },
+            {
+                header: t('Actions.Operation'),
+                minWidth: 50,
+                accessorKey: 'Id',
+                id: 'actions',
+                cell: ({ cell }) => (
+                    <Link
+                        className='btn btn-sm btn-info'
+                        to={`/patients/show/${cell.getValue()}`}
+                    >
+                        {false ? (
+                            <Loader isLoading={true} color='text-dark' />
+                        ) : (
+                            t('Actions.Show')
+                        )}
+                    </Link>
+                ),
+            }
+        ], []);
 
     return (
         <>
