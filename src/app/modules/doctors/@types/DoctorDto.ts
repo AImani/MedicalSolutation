@@ -1,4 +1,4 @@
-import { AddressDto, CreateMedicalDocumentDto } from "../../basic-info/@types";
+import { AddressDto, CreateMedicalDocumentDto } from "../../basic-infos/@types";
 import { BaseRequest } from "../../general/@types";
 
 export interface DoctorGridDto {

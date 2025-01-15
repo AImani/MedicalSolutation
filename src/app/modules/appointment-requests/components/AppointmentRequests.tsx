@@ -3,7 +3,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { Table } from '@/_metronic/partials/controls';
+import { Button, Table } from '@/_metronic/partials/controls';
 import { addDays } from '@/_metronic/helpers';
 import {
     ListViewProvider,
@@ -15,19 +15,10 @@ import { CartableFilter } from './Filter';
 import { ToWords } from 'to-words';
 import { AppointmentRequestGridDto } from '../@types';
 import { useAppointmentRequests } from '../services/CoreService';
+import Loader from '@/_metronic/partials/layout/loader';
 
 export const AppointmentRequests = () => {
     const { t } = useTranslation();
-    const towards = new ToWords({
-        localeCode: 'fa-IR',
-        converterOptions: {
-            currency: true,
-            ignoreDecimal: true,
-            ignoreZeroCurrency: true,
-            doNotAddOnly: false,
-        },
-    });
-
     const validationSchema = yup.object({
         ResponseFromDate: yup.date().required(t('Messages.Required', { 0: t('Financial.Report.ResponseFromDate') })),
         ResponseToDate: yup.date().required(t('Messages.Required', { 0: t('Financial.Report.ResponseToDate') }))
@@ -69,7 +60,25 @@ export const AppointmentRequests = () => {
         {
             Header: t('AppointmentRequest.AppointmentRequestStatus'),
             accessor: 'AppointmentRequestStatus',
-        }
+        },
+        {
+            Header: t('Actions.Operation'),
+            minWidth: 65,
+            accessor: 'Id',
+            id: 'actions',
+            Cell: ({ cell }) => (
+                <Button
+                className='btn btn-sm btn-info'
+                
+              >
+                {true ? (
+                  <Loader isLoading={true} color='text-dark' />
+                ) : (
+                  t('Actions.Check')
+                )}
+              </Button>
+            ),
+          }
     ];
 
     return (
