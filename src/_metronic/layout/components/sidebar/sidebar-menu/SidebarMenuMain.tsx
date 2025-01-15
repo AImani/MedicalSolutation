@@ -47,6 +47,8 @@ console.log("t('Modules.AppointmentRequest') > ", t('Modules.AppointmentRequest'
         <SidebarMenuItem to='/basic-infos/treatment-type' title={t('BasicInfo.TreatmentType')} hasBullet={true}  />
         <SidebarMenuItem to='/basic-infos/visit-reason' title={t('BasicInfo.VisitReason')} hasBullet={true}  />
       </SidebarMenuItemWithSub>
+
+      <SidebarMenuItem to='/settings' title={t('Modules.Setting')} fontIcon='gear'/>
     </>
   )
 }
