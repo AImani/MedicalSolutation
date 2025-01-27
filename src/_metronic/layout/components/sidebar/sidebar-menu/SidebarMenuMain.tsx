@@ -29,23 +29,47 @@ console.log("t('Modules.AppointmentRequest') > ", t('Modules.AppointmentRequest'
       </SidebarMenuItemWithSub>
 
       <SidebarMenuItemWithSub
-        to='/basic-infos'
+        to='/reports'
+        title={t('Modules.Accounting')}
+        fontIcon='calculator'
+      >
+        
+      </SidebarMenuItemWithSub>
+
+      <SidebarMenuItemWithSub
+        to='/reports'
+        title={t('Modules.Warhousing')}
+        fontIcon='warehouse'
+      >
+        
+      </SidebarMenuItemWithSub>
+
+      <SidebarMenuItemWithSub
+        to='/reports'
+        title={t('Modules.Reporting')}
+        fontIcon='envelope-open-text'
+      >
+        
+      </SidebarMenuItemWithSub>
+
+      <SidebarMenuItemWithSub
+        to='/basic-info'
         title={t('Modules.BasicInfo')}
         fontIcon='heart-pulse'
       >
-        <SidebarMenuItem to='/basic-infos/appointment-purpose' title={t('BasicInfo.AppointmentPurpose')} hasBullet={true}  />
-        <SidebarMenuItem to='/basic-infos/appointment-request-status' title={t('BasicInfo.AppointmentRequestStatus')} hasBullet={true}  />
-        <SidebarMenuItem to='/basic-infos/appointment-status' title={t('BasicInfo.AppointmentStatus')} hasBullet={true}  />
-        <SidebarMenuItem to='/basic-infos/doctor-status' title={t('BasicInfo.DoctorStatus')} hasBullet={true}  />
-        <SidebarMenuItem to='/basic-infos/document-type' title={t('BasicInfo.DocumentType')} hasBullet={true}  />
-        <SidebarMenuItem to='/basic-infos/education-level' title={t('BasicInfo.Educationlevel')} hasBullet={true}  />
-        <SidebarMenuItem to='/basic-infos/image-usage-type' title={t('BasicInfo.ImageUsageType')} hasBullet={true}  />
-        <SidebarMenuItem to='/basic-infos/marital-status' title={t('BasicInfo.MaritalStatus')} hasBullet={true}  />
-        <SidebarMenuItem to='/basic-infos/medical-specialty' title={t('BasicInfo.MedicalSpecialty')} hasBullet={true}  />
-        <SidebarMenuItem to='/basic-infos/patient-status' title={t('BasicInfo.PatientStatus')} hasBullet={true}  />
-        <SidebarMenuItem to='/basic-infos/phone-number-type' title={t('BasicInfo.PhoneNumberType')} hasBullet={true}  />
-        <SidebarMenuItem to='/basic-infos/treatment-type' title={t('BasicInfo.TreatmentType')} hasBullet={true}  />
-        <SidebarMenuItem to='/basic-infos/visit-reason' title={t('BasicInfo.VisitReason')} hasBullet={true}  />
+        <SidebarMenuItem to='/basic-info/appointment-purposes' title={t('BasicInfo.AppointmentPurpose')} hasBullet={true}  />
+        <SidebarMenuItem to='/basic-info/appointment-request-status' title={t('BasicInfo.AppointmentRequestStatus')} hasBullet={true}  />
+        <SidebarMenuItem to='/basic-info/appointment-statuses' title={t('BasicInfo.AppointmentStatus')} hasBullet={true}  />
+        <SidebarMenuItem to='/basic-info/doctor-statuses' title={t('BasicInfo.DoctorStatus')} hasBullet={true}  />
+        <SidebarMenuItem to='/basic-info/document-types' title={t('BasicInfo.DocumentType')} hasBullet={true}  />
+        <SidebarMenuItem to='/basic-info/education-levels' title={t('BasicInfo.Educationlevel')} hasBullet={true}  />
+        <SidebarMenuItem to='/basic-info/image-usage-types' title={t('BasicInfo.ImageUsageType')} hasBullet={true}  />
+        <SidebarMenuItem to='/basic-info/marital-statuses' title={t('BasicInfo.MaritalStatus')} hasBullet={true}  />
+        <SidebarMenuItem to='/basic-info/medical-specialties' title={t('BasicInfo.MedicalSpecialty')} hasBullet={true}  />
+        <SidebarMenuItem to='/basic-info/patient-statuses' title={t('BasicInfo.PatientStatus')} hasBullet={true}  />
+        <SidebarMenuItem to='/basic-info/phone-number-types' title={t('BasicInfo.PhoneNumberType')} hasBullet={true}  />
+        <SidebarMenuItem to='/basic-info/treatment-types' title={t('BasicInfo.TreatmentType')} hasBullet={true}  />
+        <SidebarMenuItem to='/basic-info/visit-reasons' title={t('BasicInfo.VisitReason')} hasBullet={true}  />
       </SidebarMenuItemWithSub>
 
       <SidebarMenuItem to='/settings' title={t('Modules.Setting')} fontIcon='gear'/>

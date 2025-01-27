@@ -12,11 +12,11 @@ export interface PaginateResult<T> {
 }
 
 export interface Result<T> {
-  data: T | null;
-  isSuccess: boolean;
-  isFailed: boolean;
-  errors: string[];
-  messages: string[];
+  Data: T | null;
+  IsSuccess: boolean;
+  IsFailed: boolean;
+  Errors: string[];
+  Messages: string[];
 }
 
 export interface InfiniteResult<T> {

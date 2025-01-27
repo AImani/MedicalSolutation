@@ -10,6 +10,7 @@ import PatientsRoutes from '../modules/patients/routes'
 import { AppointmentRequests } from '../modules/appointment-requests/components'
 import { Appointments } from '../modules/appointments/components/Appointments'
 import { InsuranceCompanies } from '../modules/insurance-companies/components/InsuranceCompanies'
+import BasicInfoRoutes from '../modules/basic-infos/routes'
 
 const PrivateRoutes = () => {
   return (
@@ -39,6 +40,10 @@ const PrivateRoutes = () => {
         <Route
           path='appointments/*'
           element={<Appointments />}
+        />
+        <Route
+          path='basic-info/*'
+          element={<BasicInfoRoutes />}
         />
         {/* Page Not Found */}
         <Route path='*' element={<Navigate to='/error/404' />} />
