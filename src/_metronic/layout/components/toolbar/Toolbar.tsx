@@ -1,6 +1,6 @@
 /* eslint-disable no-prototype-builtins */
-import {useEffect} from 'react'
-import {ILayout, useLayout} from '../../core'
+import { useEffect } from 'react'
+import { ILayout, useLayout } from '../../core'
 import {
   ToolbarAccounting,
   ToolbarClassic,
@@ -10,12 +10,11 @@ import {
 } from './toolbars'
 
 const Toolbar = () => {
-  const {config} = useLayout()
+  const { config } = useLayout()
   useEffect(() => {
     updateDOM(config)
     document.body.setAttribute('data-kt-app-toolbar-enabled', 'true')
   }, [config])
-console.log('config.app?.toolbar > ', config.app?.toolbar);
 
   switch (config.app?.toolbar?.layout) {
     case 'classic':
@@ -34,20 +33,20 @@ console.log('config.app?.toolbar > ', config.app?.toolbar);
 }
 
 const updateDOM = (config: ILayout) => {
-  let appToolbarSwapAttributes: {[attrName: string]: string} = {}
+  let appToolbarSwapAttributes: { [attrName: string]: string } = {}
   const appToolbarSwapEnabled = config.app?.toolbar?.swap?.enabled
   if (appToolbarSwapEnabled) {
-    appToolbarSwapAttributes = config.app?.toolbar?.swap?.attributes as {[attrName: string]: string}
+    appToolbarSwapAttributes = config.app?.toolbar?.swap?.attributes as { [attrName: string]: string }
   }
 
-  let appToolbarStickyAttributes: {[attrName: string]: string} = {}
+  let appToolbarStickyAttributes: { [attrName: string]: string } = {}
   const appToolbarStickyEnabled = config.app?.toolbar?.sticky?.enabled
   if (appToolbarStickyEnabled) {
     appToolbarStickyAttributes = config.app?.toolbar?.sticky?.attributes as {
       [attrName: string]: string
     }
 
-    let appToolbarMinimizeAttributes: {[attrName: string]: string} = {}
+    let appToolbarMinimizeAttributes: { [attrName: string]: string } = {}
     const appToolbarMinimizeEnabled = config.app?.toolbar?.minimize?.enabled
     if (appToolbarMinimizeEnabled) {
       appToolbarMinimizeAttributes = config.app?.toolbar?.minimize?.attributes as {
@@ -100,4 +99,4 @@ const updateDOM = (config: ILayout) => {
   }
 }
 
-export {Toolbar}
+export { Toolbar }

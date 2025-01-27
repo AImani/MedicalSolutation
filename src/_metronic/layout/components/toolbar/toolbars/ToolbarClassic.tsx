@@ -25,6 +25,11 @@ const ToolbarClassic = () => {
   
   return (
     <div className='d-flex align-items-center gap-2 gap-lg-3'>
+      {config.app?.toolbar?.actions?.map(x=> 
+        <>
+        {x}
+        </>
+      )}
       {/* {config.app?.toolbar?.filterButton && (
         <div className='m-0'>
           <a

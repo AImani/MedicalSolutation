@@ -38,3 +38,7 @@
 .was-validated .form-control:invalid, .form-control.is-invalid {
   background: none !important;
 }
+
+.table td:first-child {
+  padding-right: .75rem !important;
+}

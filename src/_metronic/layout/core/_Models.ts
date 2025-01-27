@@ -1,3 +1,5 @@
+import { ReactNode } from "react"
+
 export type LayoutType = 'dark-sidebar' | 'light-sidebar' | 'dark-header' | 'light-header'
 
 export type CSSClassesType = {
@@ -109,6 +111,7 @@ export interface IToolbar extends ILayoutComponent {
   componentName?: 'toolbar'
   display?: boolean
   layout?: ToolbarType
+  actions: ReactNode[]
   class?: string
   container?: 'fixed' | 'fluid'
   containerClass?: string

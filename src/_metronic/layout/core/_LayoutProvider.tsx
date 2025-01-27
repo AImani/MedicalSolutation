@@ -1,6 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import {FC, createContext, useContext, useState, useEffect} from 'react'
+import {FC, createContext, useContext, useState, useEffect, ReactNode} from 'react'
 import {DefaultConfig} from './_LayoutConfig'
 import {
   setLayoutIntoLocalStorage,
@@ -27,6 +27,7 @@ export interface LayoutContextModel {
   setLayout: (config: LayoutSetup) => void
   setLayoutType: (layoutType: LayoutType) => void
   setToolbarType: (toolbarType: ToolbarType) => void
+  setActions: (acions: ReactNode[]) => void
 }
 
 const LayoutContext = createContext<LayoutContextModel>({
@@ -37,6 +38,7 @@ const LayoutContext = createContext<LayoutContextModel>({
   setLayout: (_config: LayoutSetup) => {},
   setLayoutType: (_layoutType: LayoutType) => {},
   setToolbarType: (_toolbarType: ToolbarType) => {},
+  setActions: (_acions: ReactNode[]) => {},
 })
 
 const enableSplashScreen = () => {
@@ -89,6 +91,15 @@ const LayoutProvider: FC<WithChildren> = ({children}) => {
     window.location.reload()
   }
 
+  const setActions = (acions: ReactNode[]) => {
+    const updatedConfig = {...config}
+    if (updatedConfig.app?.toolbar) {
+      updatedConfig.app.toolbar.actions = acions
+    }
+
+    setLayoutIntoLocalStorage(updatedConfig)
+  }
+
   const value: LayoutContextModel = {
     config,
     classes,
@@ -97,6 +108,7 @@ const LayoutProvider: FC<WithChildren> = ({children}) => {
     setLayout,
     setLayoutType,
     setToolbarType,
+    setActions
   }
 
   useEffect(() => {

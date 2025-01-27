@@ -9,7 +9,7 @@ import { ActivityDrawer, DrawerMessenger, InviteUsers, UpgradePlan } from '../pa
 import { PageDataProvider } from './core'
 import { reInitMenu } from '../helpers'
 import { ToolbarWrapper } from './components/toolbar'
-import { Toaster } from 'react-hot-toast'
+import { Bounce, ToastContainer } from 'react-toastify'
 
 const MasterLayout = () => {
   const location = useLocation()
@@ -21,12 +21,25 @@ const MasterLayout = () => {
     <PageDataProvider>
       <div className='d-flex flex-column flex-root app-root' id='kt_app_root'>
         <div className='app-page flex-column flex-column-fluid' id='kt_app_page'>
-          <Toaster />
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop
+            closeOnClick={false}
+            rtl
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+            transition={Bounce}
+          />
+
           <HeaderWrapper />
           <div className='app-wrapper flex-column flex-row-fluid' id='kt_app_wrapper'>
             <Sidebar />
             <div className='app-main flex-column flex-row-fluid' id='kt_app_main'>
-              <div className='d-flex flex-column flex-column-fluid'>
+              <div className='d-flex flex-column flex-column-fluid mt-5'>
                 <ToolbarWrapper />
                 <Content>
                   <Outlet />
