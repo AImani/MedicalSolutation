@@ -1,4 +1,3 @@
-import { Column } from 'react-table';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -15,6 +14,8 @@ import { CartableFilter } from './Filter';
 import { ToWords } from 'to-words';
 import { InsuranceCompanyGridDto } from '../@types';
 import { useInsuranceCompanies } from '../services/InsuranceCompanyService';
+import { useMemo } from 'react';
+import { ColumnDef } from '@tanstack/react-table';
 
 export const InsuranceCompanies = () => {
     const { t } = useTranslation();
@@ -49,20 +50,21 @@ export const InsuranceCompanies = () => {
         resolver: yupResolver(validationSchema)
     });
 
-    const columns: ReadonlyArray<Column<InsuranceCompanyGridDto>> = [
-        {
-            Header: t('InsuranceCompany.Name'),
-            accessor: 'Name'
-        },
-        {
-            Header: t('InsuranceCompany.Email'),
-            accessor: 'Email'
-        },
-        {
-            Header: t('InsuranceCompany.PhoneNumber'),
-            accessor: 'PhoneNumber',
-        }
-    ];
+    const columns = useMemo<ColumnDef<InsuranceCompanyGridDto, any>[]>(
+        () => [
+            {
+                header: t('InsuranceCompany.Name'),
+                accessor: 'Name'
+            },
+            {
+                header: t('InsuranceCompany.Email'),
+                accessor: 'Email'
+            },
+            {
+                header: t('InsuranceCompany.PhoneNumber'),
+                accessor: 'PhoneNumber',
+            }
+        ], []);
 
     return (
         <>

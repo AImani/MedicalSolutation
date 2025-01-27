@@ -8,7 +8,7 @@ import { useQueryClient } from "@tanstack/react-query"
 import { useEffect, useMemo, useState } from "react"
 import { useListView, useQueryRequest } from "@/_metronic/partials/controls/Table"
 import usePermission from '../../auth/permissions/hook';
-import toast from "react-hot-toast"
+import { toast } from "react-toastify";
 
 export const CartableFilter = () => {
     const methods = useFormContext();

@@ -1,4 +1,3 @@
-import { Column } from 'react-table';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -16,6 +15,8 @@ import { CartableFilter } from './Filter';
 import { ToWords } from 'to-words';
 import { DoctorGridDto } from '../@types';
 import { useDoctors } from '../services/DoctorService';
+import { useMemo } from 'react';
+import { ColumnDef } from '@tanstack/react-table';
 
 export const Doctors = () => {
     const { t } = useTranslation();
@@ -50,40 +51,41 @@ export const Doctors = () => {
         resolver: yupResolver(validationSchema)
     });
 
-    const columns: ReadonlyArray<Column<DoctorGridDto>> = [
-        {
-            Header: t('Doctor.FirstName'),
-            accessor: 'FirstName'
-        },
-        {
-            Header: t('Doctor.LastName'),
-            accessor: 'LastName'
-        },
-        {
-            Header: t('Doctor.PhoneNumber'),
-            accessor: 'PhoneNumber',
-        },
-        {
-            Header: t('Doctor.Email'),
-            accessor: 'Email',
-        },
-        {
-            Header: t('Doctor.DateOfBirth'),
-            accessor: 'DateOfBirth'
-        },
-        {
-            Header: t('Doctor.MedicalSpecialtyName'),
-            accessor: 'MedicalSpecialtyName',
-        },
-        {
-            Header: t('Doctor.DoctorStatusName'),
-            accessor: 'DoctorStatusName',
-        },
-        {
-            Header: t('Doctor.AddressLine'),
-            accessor: 'AddressLine',
-        }
-    ];
+    const columns = useMemo<ColumnDef<DoctorGridDto, any>[]>(
+        () => [
+            {
+                header: t('Doctor.FirstName'),
+                accessor: 'FirstName'
+            },
+            {
+                header: t('Doctor.LastName'),
+                accessor: 'LastName'
+            },
+            {
+                header: t('Doctor.PhoneNumber'),
+                accessor: 'PhoneNumber',
+            },
+            {
+                header: t('Doctor.Email'),
+                accessor: 'Email',
+            },
+            {
+                header: t('Doctor.DateOfBirth'),
+                accessor: 'DateOfBirth'
+            },
+            {
+                header: t('Doctor.MedicalSpecialtyName'),
+                accessor: 'MedicalSpecialtyName',
+            },
+            {
+                header: t('Doctor.DoctorStatusName'),
+                accessor: 'DoctorStatusName',
+            },
+            {
+                header: t('Doctor.AddressLine'),
+                accessor: 'AddressLine',
+            }
+        ], []);
 
     return (
         <>

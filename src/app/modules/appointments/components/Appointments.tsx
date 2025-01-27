@@ -1,4 +1,3 @@
-import { Column } from 'react-table';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -15,6 +14,8 @@ import { CartableFilter } from './Filter';
 import { ToWords } from 'to-words';
 import { AppointmentGridDto } from '../@types';
 import { useAppointments } from '../services/AppointmentService';
+import { useMemo } from 'react';
+import { ColumnDef } from '@tanstack/react-table';
 
 export const Appointments = () => {
     const { t } = useTranslation();
@@ -49,28 +50,29 @@ export const Appointments = () => {
         resolver: yupResolver(validationSchema)
     });
 
-    const columns: ReadonlyArray<Column<AppointmentGridDto>> = [
-        {
-            Header: t('Appointment.PatientName'),
-            accessor: 'PatientName'
-        },
-        {
-            Header: t('Appointment.DoctorName'),
-            accessor: 'DoctorName'
-        },
-        {
-            Header: t('Appointment.AppointmentStatus'),
-            accessor: 'AppointmentStatus',
-        },
-        {
-            Header: t('Appointment.AppointmentPurpose'),
-            accessor: 'AppointmentPurpose',
-        },
-        {
-            Header: t('Appointment.AppointmentDate'),
-            accessor: 'AppointmentDate',
-        }
-    ];
+    const columns = useMemo<ColumnDef<AppointmentGridDto, any>[]>(
+        () => [
+            {
+                header: t('Appointment.PatientName'),
+                accessor: 'PatientName'
+            },
+            {
+                header: t('Appointment.DoctorName'),
+                accessor: 'DoctorName'
+            },
+            {
+                header: t('Appointment.AppointmentStatus'),
+                accessor: 'AppointmentStatus',
+            },
+            {
+                header: t('Appointment.AppointmentPurpose'),
+                accessor: 'AppointmentPurpose',
+            },
+            {
+                header: t('Appointment.AppointmentDate'),
+                accessor: 'AppointmentDate',
+            }
+        ], []);
 
     return (
         <>

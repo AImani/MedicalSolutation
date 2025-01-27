@@ -21,9 +21,6 @@ export const View = ({ show, onHide, data }: ViewModalProps) => {
                 <label className="form-label">{t('BasicInfo.Title')}</label>
                 <label className="form-control" >{data?.Title}</label>
             </Modal.Body>
-            <Modal.Footer>
-                <Button variant="secondary" onClick={onHide}><i className="fas fa-close"></i> {t('Actions.Close')}</Button>
-            </Modal.Footer>
         </Modal>
     );
 }
