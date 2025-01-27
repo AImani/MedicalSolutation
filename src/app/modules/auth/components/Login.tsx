@@ -8,7 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { LoginRequestCommand } from "..";
 import { useTranslation } from "react-i18next";
 import { useQueryClient } from "@tanstack/react-query";
-import toast from "react-hot-toast";
+import { toast } from "react-toastify";
 import { ExceptionError } from "../../general/@types";
 import { PageTitle } from "@/_metronic/layout/core";
 
@@ -44,14 +44,13 @@ export function Login() {
     setLoading(true);
     try {
       const { data: auth } = await login(values);
-      const token = auth?.data!;
-      console.log('auth > ', auth);
+      const token = auth?.Data!;
       
       saveAuth({ api_token: token });
       const { data: userInfo } = await profile();
 
-      if (userInfo.data)
-        saveUser(userInfo.data);
+      if (userInfo.Data)
+        saveUser(userInfo.Data);
 
       queryClient.clear();
     } catch (error) {

@@ -1,13 +1,13 @@
 
-import {useEffect} from 'react'
-import {Outlet, Link} from 'react-router-dom'
-import {toAbsoluteUrl} from '../../../_metronic/helpers'
-import { Toaster } from 'react-hot-toast'
+import { useEffect } from 'react'
+import { Outlet, Link } from 'react-router-dom'
+import { toAbsoluteUrl } from '../../../_metronic/helpers'
+import { Bounce, ToastContainer } from 'react-toastify'
 import { useTranslation } from 'react-i18next'
 
 const AuthLayout = () => {
-    const { t } = useTranslation();
-  
+  const { t } = useTranslation();
+
   useEffect(() => {
     const root = document.getElementById('root')
     if (root) {
@@ -28,7 +28,19 @@ const AuthLayout = () => {
         <div className='d-flex flex-center flex-column flex-lg-row-fluid'>
           {/* begin::Wrapper */}
           <div className='w-lg-500px p-10'>
-            <Toaster />
+            <ToastContainer
+              position="top-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop
+              closeOnClick={false}
+              rtl
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="colored"
+              transition={Bounce}
+            />
             <Outlet />
           </div>
           {/* end::Wrapper */}
@@ -42,7 +54,7 @@ const AuthLayout = () => {
       {/* begin::Aside */}
       <div
         className='d-flex flex-lg-row-fluid w-lg-50 bgi-size-cover bgi-position-center order-1 order-lg-2'
-        style={{backgroundImage: `url(${toAbsoluteUrl('/media/misc/auth-bg.png')})`}}
+        style={{ backgroundImage: `url(${toAbsoluteUrl('/media/misc/auth-bg.png')})` }}
       >
         {/* begin::Content */}
         <div className='d-flex flex-column flex-center py-15 px-5 px-md-15 w-100'>
@@ -74,4 +86,4 @@ const AuthLayout = () => {
   )
 }
 
-export {AuthLayout}
+export { AuthLayout }
