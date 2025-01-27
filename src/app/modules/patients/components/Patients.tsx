@@ -3,6 +3,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import moment from 'jalali-moment';
 import { Button, Table } from '@/_metronic/partials/controls';
 import { addDays } from '@/_metronic/helpers';
 import {
@@ -12,7 +13,6 @@ import {
 } from '@/_metronic/partials/controls/Table';
 import { PageTitle } from '@/_metronic/layout/core';
 import { CartableFilter } from './Filter';
-import { ToWords } from 'to-words';
 import { PatientGridDto } from '../@types';
 import { usePatients } from '../services/PatientService';
 import Loader from '@/_metronic/partials/layout/loader';
@@ -21,15 +21,6 @@ import { Link } from 'react-router-dom';
 
 export const Patients = () => {
     const { t } = useTranslation();
-    const towards = new ToWords({
-        localeCode: 'fa-IR',
-        converterOptions: {
-            currency: true,
-            ignoreDecimal: true,
-            ignoreZeroCurrency: true,
-            doNotAddOnly: false,
-        },
-    });
 
     const validationSchema = yup.object({
         ResponseFromDate: yup.date().required(t('Messages.Required', { 0: t('Financial.Report.ResponseFromDate') })),
@@ -80,7 +71,16 @@ export const Patients = () => {
             },
             {
                 header: t('Patient.BirthDate'),
-                accessorKey: 'BirthDate'
+                accessorKey: 'BirthDate',
+                cell: ({ cell }) => (
+                    <>
+                        {!!cell.row.original.BirthDate
+                            ? moment
+                                .from(cell.row.original.BirthDate, "en", "YYYY/MM/DD")
+                                .format('jYYYY/jMM/jDD')
+                            : ''}
+                    </>
+                ),
             },
             {
                 header: t('Patient.PatientStatusName'),

@@ -1,4 +1,4 @@
-import { AddressDto, CreateMedicalDocumentDto } from "../../basic-infos/@types";
+import { CreateAddressDto, CreateMedicalDocumentDto } from "../../basic-infos/@types";
 import { BaseRequest } from "../../general/@types";
 import { ContactInfoDto } from "./BasicInfoDto";
 
@@ -41,7 +41,7 @@ export interface CreatePatientDto {
     EducationLevelId: number | null;
     InsuranceCompanyId: number | null;
     
-    Address: AddressDto;
+    Address: CreateAddressDto;
     ContactInfo: ContactInfoDto;
     MedicalDocuments: CreateMedicalDocumentDto[];
 }

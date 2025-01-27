@@ -1,70 +1,43 @@
-import React, { useState } from 'react';
+import { InputField, SelectField } from '@/_metronic/partials/controls';
+import React, { useEffect, useState } from 'react';
+import { Col, Row } from 'react-bootstrap';
+import { useCities } from '../../basic-infos/services';
+import { useTranslation } from 'react-i18next';
+import { useProvinces } from '../../basic-infos/services/ProvinceService';
+import { useForm, useFormContext, useWatch } from 'react-hook-form';
 
 const Address: React.FC = () => {
-    const [address, setAddress] = useState({
-        street: '',
-        city: '',
-        state: '',
-        zip: ''
-    });
+    const { t } = useTranslation();
+    const form = useFormContext()
+    const provinceId: number | undefined = useWatch({control: form.control, name: 'Address.ProvinceId'})
+    const { data: provinces } = useProvinces({} as any);
+    const { data: cities, refetch } = useCities({ ProvinceId: provinceId });
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setAddress({
-            ...address,
-            [name]: value
-        });
-    };
-
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        console.log('Address submitted:', address);
-    };
-
+    useEffect(() => {
+        if(!!provinceId)
+            refetch()
+     }, [provinceId]);
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label htmlFor="street">Street:</label>
-                <input
-                    type="text"
-                    id="street"
-                    name="street"
-                    value={address.street}
-                    onChange={handleChange}
-                />
-            </div>
-            <div>
-                <label htmlFor="city">City:</label>
-                <input
-                    type="text"
-                    id="city"
-                    name="city"
-                    value={address.city}
-                    onChange={handleChange}
-                />
-            </div>
-            <div>
-                <label htmlFor="state">State:</label>
-                <input
-                    type="text"
-                    id="state"
-                    name="state"
-                    value={address.state}
-                    onChange={handleChange}
-                />
-            </div>
-            <div>
-                <label htmlFor="zip">Zip Code:</label>
-                <input
-                    type="text"
-                    id="zip"
-                    name="zip"
-                    value={address.zip}
-                    onChange={handleChange}
-                />
-            </div>
-            <button type="submit">Submit</button>
-        </form>
+        <Row>
+            <Col lg={4} md={6} className='mb-2'>
+                <SelectField name="Address.ProvinceId" label={t('Address.Province')} options={provinces?.Data.Result.map(x => ({ label: x.Title, value: x.Id }))} />
+            </Col>
+            <Col lg={4} md={6} className='mb-2'>
+                <SelectField name="Address.CityId" label={t('Address.City')} options={cities?.Data.Result.map(x => ({ label: x.Title, value: x.Id }))} />
+            </Col>
+            <Col>
+                <InputField name='Address.PostalCode' label={t('Address.PostalCode')} />
+            </Col>
+            <Col lg={8} md={6} className='mb-2'>
+                <InputField name='Address.FullAddress' label={t('Address.FullAddress')} />
+            </Col>
+            <Col lg={2} md={2} className='mb-2'>
+                <InputField name='Address.ApartmentNo' label={t('Address.ApartmentNo')} />
+            </Col>
+            <Col lg={2} md={2} className='mb-2'>
+                <InputField name='Address.UnitNo' label={t('Address.UnitNo')} />
+            </Col>
+        </Row>
     );
 };
 

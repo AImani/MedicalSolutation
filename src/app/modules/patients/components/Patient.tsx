@@ -3,12 +3,12 @@ import { useState } from 'react';
 import { Tabs, Tab, Card, Nav, Row, Col } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { usePatientStatuses } from '../../basic-infos/services/PatientStatusService';
-import { useEducationleveles, useMaritalStatuses } from '../../basic-infos/services';
+import { useEducationlevels, useMaritalStatuses } from '../../basic-infos/services';
 
 const Patient: React.FC = () => {
     const { t } = useTranslation();
     const { data: patientStatuses } = usePatientStatuses({} as any);
-    const { data: educationleveles } = useEducationleveles({} as any);
+    const { data: educationleveles } = useEducationlevels({} as any);
     const { data: maritalStatuses } = useMaritalStatuses({} as any);
 
     return (
