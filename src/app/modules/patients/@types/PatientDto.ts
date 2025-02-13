@@ -1,6 +1,6 @@
 import { CreateAddressDto, CreateMedicalDocumentDto } from "../../basic-infos/@types";
 import { BaseRequest } from "../../general/@types";
-import { ContactInfoDto } from "./BasicInfoDto";
+import { ContactInfoDto, CreateContactInfoDto } from "./BasicInfoDto";
 
 export interface PatientRequestDto extends BaseRequest {
     PhoneNo: string | null;
@@ -33,17 +33,17 @@ export interface PatientGridDto {
 export interface CreatePatientDto {
     FirstName: string;
     LastName: string;
-    BirthDate: string | null;
-    IntroductionChannel: string | null;
-    Occupation: string | null;
-    PatientStatusId: number | null;
-    MaritalStatusId: number | null;
-    EducationLevelId: number | null;
-    InsuranceCompanyId: number | null;
+    BirthDate?: Date | null;
+    IntroductionChannel?: string | null;
+    Occupation?: string | null;
+    PatientStatusId: number;
+    MaritalStatusId?: number | null;
+    EducationLevelId?: number | null;
+    InsuranceCompanyId?: number | null;
     
-    Address: CreateAddressDto;
-    ContactInfo: ContactInfoDto;
-    MedicalDocuments: CreateMedicalDocumentDto[];
+    Address?: CreateAddressDto;
+    ContactInfo?: CreateContactInfoDto;
+    MedicalDocuments?: CreateMedicalDocumentDto[];
 }
 
 export interface UpdatePatientDto {

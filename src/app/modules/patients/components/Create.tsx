@@ -4,14 +4,20 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FormProvider, useForm } from "react-hook-form";
 import { CreatePatientDto } from "../@types";
-import Address from "./Address";
-import MedicalDocument from "./MedicalDocument";
+import { MedicalDocuments } from "./MedicalDocuments";
 import { Link } from "react-router-dom";
 import ContantInfo from "./ContantInfo";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { createPatientSchema } from "../services/SchemaValidation";
+import { PageTitle, useLayout } from "@/_metronic/layout/core";
+import { Address } from "../../general/components";
 
 export const Create = () => {
     const { t } = useTranslation()
-    const [activeTab, setActiveTab] = useState('Patient');
+    const { setActions } = useLayout()
+
+    const [activeTab, setActiveTab] = useState('ContantInfo');
+
     const form = useForm<CreatePatientDto>({
         defaultValues: {
             FirstName: "مهرداد",
@@ -19,50 +25,66 @@ export const Create = () => {
             ContactInfo: {
                 Email: "test",
                 PhoneNumbers: [
-                    { PhoneNumberValue: '09191830178' }
+                    { PhoneNo: '09191830178', PhoneTypeId: 1 }
                 ]
             }
-        }
+        },
+        resolver: yupResolver<any>(createPatientSchema)
     });
+    const { errors } = form.formState;
     const onSubmit = form.handleSubmit((values) => {
         console.log(values)
     });
 
+    setActions(
+        [
+            <Link className="btn btn-sm btn-secondary" to="/patients"><i className="fas fa-arrow-right">
+            </i> {t('Actions.Cancel')}
+            </Link>,
+            <Button variant="success" size="sm" onClick={onSubmit}>
+                <i className='fas fa-check'></i> {t('Actions.Save')}
+            </Button>,
+        ]
+    )
+
     return (
         <FormProvider {...form}>
+            <PageTitle>{t('Patients.Singular')}</PageTitle>
             <Form onSubmit={onSubmit}>
                 <Card>
-                    <Card.Header className='min-h-auto py-2'>
+                    <Card.Body className="p-5 pb-0">
+                        <Patient />
                         <Nav
                             variant="tabs"
-                            className='fs-4 align-self-end'
+                            className='nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bold mt-2'
                             activeKey={activeTab}
                             onSelect={(k) => k && setActiveTab(k)}>
                             <Nav.Item className="pt-2">
-                                <Nav.Link eventKey="Patient">{t('Patient.Title')}</Nav.Link>
+                                <Nav.Link eventKey="ContantInfo">{t('ContantInfo.Singular')}</Nav.Link>
                             </Nav.Item>
                             <Nav.Item className="pt-2">
-                                <Nav.Link eventKey="ContantInfo">{t('ContantInfo.Title')}</Nav.Link>
+                                <Nav.Link eventKey="Address">{t('Address.Singular')}</Nav.Link>
                             </Nav.Item>
                             <Nav.Item className="pt-2">
-                                <Nav.Link eventKey="Address">{t('Address.Title')}</Nav.Link>
+                                <Nav.Link eventKey="MedicalDocuments">{t('MedicalDocument.Plural')}</Nav.Link>
                             </Nav.Item>
                             <Nav.Item className="pt-2">
-                                <Nav.Link eventKey="MedicalDocument">{t('MedicalDocument.Title')}</Nav.Link>
+                                <Nav.Link eventKey="Appointments">{t('Appointment.Plural')}</Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item className="pt-2">
+                                <Nav.Link eventKey="VisitHistories">{t('VisitHistory.Plural')}</Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item className="pt-2">
+                                <Nav.Link eventKey="Bills">{t('Bill.Plural')}</Nav.Link>
                             </Nav.Item>
                         </Nav>
-                        <div className='card-toolbar m-0 mt-2'>
-                            <Button variant="success" onClick={() => setActiveTab('first')}>
-                                <i className='fas fa-check'></i> {t('Actions.Save')}
-                            </Button>
-                            <Link className="btn btn-danger ms-2" to="/patients"><i className="fas fa-cancel"></i> {t('Actions.Cancel')}</Link>
-                        </div>
-                    </Card.Header>
+                    </Card.Body>
+                </Card>
+                <Card className="mt-5">
                     <Card.Body>
-                        {activeTab === 'Patient' && <Patient />}
                         {activeTab === 'ContantInfo' && <ContantInfo />}
                         {activeTab === 'Address' && <Address />}
-                        {activeTab === 'MedicalDocument' && <MedicalDocument />}
+                        {activeTab === 'MedicalDocument' && <MedicalDocuments />}
                     </Card.Body>
                 </Card>
             </Form>

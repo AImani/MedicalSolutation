@@ -1,7 +1,6 @@
-import { Button, DatePickerField, InputField, SelectField } from '@/_metronic/partials/controls';
-import { useState } from 'react';
-import { Tabs, Tab, Card, Nav, Row, Col, ListGroup } from 'react-bootstrap';
-import { useFieldArray, useFormContext, useWatch } from 'react-hook-form';
+import { InputField } from '@/_metronic/partials/controls';
+import { Row, Col } from 'react-bootstrap';
+import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { CreatePatientDto } from '../@types';
 import { Phones } from './Phones';
@@ -14,12 +13,13 @@ const ContantInfo: React.FC = () => {
     <>
       <Row>
         <Col lg={4} md={6} className='mb-2'>
-          <InputField name="ContactInfo.Email" label={t('Patient.Email')} />
+          <InputField name="ContactInfo.Email" label={t('Fields.Email')} />
         </Col>
       </Row>
       <Row className='mt-5'>
-        <h3>{t('ContantInfo.Phones')}</h3>
-        <Phones />
+        <Col lg={6}>
+          <Phones />
+        </Col>
       </Row>
     </>
   );

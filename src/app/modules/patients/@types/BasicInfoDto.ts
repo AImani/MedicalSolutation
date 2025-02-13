@@ -26,25 +26,25 @@ export interface UpdateContactInfoDto {
 
 export interface PhoneNumberGridDto {
     Id: number;
-    PhoneNumberValue: string;
-    PhoneNumberTypeId: number;
+    PhoneNo: string;
+    PhoneTypeId: number;
     PhoneNumberType: string;
 }
 
 export interface PhoneNumberDto {
     Id: number;
-    PhoneNumberValue: string;
-    PhoneNumberTypeId: number;
+    PhoneNo: string;
+    PhoneTypeId: number;
     PhoneNumberType: string;
 }
 
 export interface CreatePhoneNumberDto {
-    PhoneNumberValue: string;
-    PhoneNumberTypeId: number;
+    PhoneNo?: string;
+    PhoneTypeId?: number;
 }
 
 export interface UpdatePhoneNumberDto {
     Id: number;
-    PhoneNumberValue: string;
-    PhoneNumberTypeId: number;
+    PhoneNo: string;
+    PhoneTypeId: number;
 }

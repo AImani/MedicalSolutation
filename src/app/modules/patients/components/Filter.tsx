@@ -92,11 +92,6 @@ export const CartableFilter = () => {
                                     </Button>
                                 </InputGroup>
                             </Col>
-                            <Col xs={'auto'} className='pt-5 mt-2'>
-                                <Link type='button' className="btn btn-success" to='/patients/create'>
-                                    <KTIcon iconName='plus-square' iconType='solid' className='fs-2 me-2' /> {t('Actions.Add')}
-                                </Link>
-                            </Col>
                         </Row>
                     </Card.Body>
                 </Form>

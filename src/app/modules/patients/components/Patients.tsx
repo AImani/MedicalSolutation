@@ -11,7 +11,7 @@ import {
     QueryRequestProvider,
     QueryResponseProvider,
 } from '@/_metronic/partials/controls/Table';
-import { PageTitle } from '@/_metronic/layout/core';
+import { PageTitle, useLayout } from '@/_metronic/layout/core';
 import { CartableFilter } from './Filter';
 import { PatientGridDto } from '../@types';
 import { usePatients } from '../services/PatientService';
@@ -21,6 +21,24 @@ import { Link } from 'react-router-dom';
 
 export const Patients = () => {
     const { t } = useTranslation();
+    const { setActions } = useLayout()
+    setActions(
+        [
+            <button
+                className='btn btn-sm fw-bold btn-secondary'
+            >
+                <i className='fas fa-filter'></i>
+                {t('Actions.Filter')}
+            </button>,
+            <Link
+                to='/patients/create'
+                className='btn btn-sm fw-bold btn-primary'
+            >
+                <i className='fas fa-plus'></i>
+                {t('Actions.Create')}
+            </Link>,
+        ]
+    )
 
     const validationSchema = yup.object({
         ResponseFromDate: yup.date().required(t('Messages.Required', { 0: t('Financial.Report.ResponseFromDate') })),
@@ -46,31 +64,31 @@ export const Patients = () => {
     const columns = useMemo<ColumnDef<PatientGridDto, any>[]>(
         () => [
             {
-                header: () => t('Patient.FirstName'),
+                header: () => t('Fields.FirstName'),
                 accessorKey: 'FirstName',
             },
             {
-                header: t('Patient.LastName'),
+                header: t('Fields.LastName'),
                 accessorKey: 'LastName'
             },
             {
-                header: t('Patient.PhoneNo'),
+                header: t('Fields.PhoneNo'),
                 accessorKey: 'PhoneNo',
             },
             {
-                header: t('Patient.CellPhoneNo'),
+                header: t('Fields.CellPhoneNo'),
                 accessorKey: 'CellPhoneNo',
             },
             {
-                header: t('Patient.EmergencyPhoneNo'),
+                header: t('Fields.EmergencyPhoneNo'),
                 accessorKey: 'EmergencyPhoneNo',
             },
             {
-                header: t('Patient.Email'),
+                header: t('Fields.Email'),
                 accessorKey: 'Email',
             },
             {
-                header: t('Patient.BirthDate'),
+                header: t('Fields.BirthDate'),
                 accessorKey: 'BirthDate',
                 cell: ({ cell }) => (
                     <>
@@ -83,23 +101,23 @@ export const Patients = () => {
                 ),
             },
             {
-                header: t('Patient.PatientStatusName'),
+                header: t('Fields.StatusNameOf', {0: t('Patient.Singular')}),
                 accessorKey: 'PatientStatusName',
             },
             {
-                header: t('Patient.MaritalStatusName'),
+                header: t('Fields.MaritalStatusName'),
                 accessorKey: 'MaritalStatusName',
             },
             {
-                header: t('Patient.EducationLevelName'),
+                header: t('Fields.EducationLevelName'),
                 accessorKey: 'EducationLevelName',
             },
             {
-                header: t('Patient.AddressLine'),
+                header: t('Fields.AddressLine'),
                 accessorKey: 'AddressLine',
             },
             {
-                header: t('Patient.InsuranceCompanyName'),
+                header: t('Fields.InsuranceCompanyName'),
                 accessorKey: 'InsuranceCompanyName',
             },
             {
