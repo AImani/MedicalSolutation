@@ -10,16 +10,36 @@ import {
     QueryResponseProvider,
 } from '@/_metronic/partials/controls/Table';
 import { useFinancialTransfers } from '../services/ReportService';
-import { PageTitle } from '@/_metronic/layout/core';
+import { PageTitle, useLayout } from '@/_metronic/layout/core';
 import { CartableFilter } from './Filter';
 import { ToWords } from 'to-words';
 import { DoctorGridDto } from '../@types';
 import { useDoctors } from '../services/DoctorService';
 import { useMemo } from 'react';
 import { ColumnDef } from '@tanstack/react-table';
+import { Link } from 'react-router-dom';
 
 export const Doctors = () => {
     const { t } = useTranslation();
+    const { setActions } = useLayout()
+    setActions(
+        [
+            <button
+                className='btn btn-sm fw-bold btn-secondary'
+            >
+                <i className='fas fa-filter'></i>
+                {t('Actions.Filter')}
+            </button>,
+            <Link
+                to='/doctors/create'
+                className='btn btn-sm fw-bold btn-primary'
+            >
+                <i className='fas fa-plus'></i>
+                {t('Actions.Create')}
+            </Link>,
+        ]
+    )
+
     const towards = new ToWords({
         localeCode: 'fa-IR',
         converterOptions: {
@@ -54,35 +74,35 @@ export const Doctors = () => {
     const columns = useMemo<ColumnDef<DoctorGridDto, any>[]>(
         () => [
             {
-                header: t('Doctor.FirstName'),
+                header: t('Fields.FirstName'),
                 accessor: 'FirstName'
             },
             {
-                header: t('Doctor.LastName'),
+                header: t('Fields.LastName'),
                 accessor: 'LastName'
             },
             {
-                header: t('Doctor.PhoneNumber'),
+                header: t('Fields.PhoneNumber'),
                 accessor: 'PhoneNumber',
             },
             {
-                header: t('Doctor.Email'),
+                header: t('Fields.Email'),
                 accessor: 'Email',
             },
             {
-                header: t('Doctor.DateOfBirth'),
+                header: t('Fields.DateOfBirth'),
                 accessor: 'DateOfBirth'
             },
             {
-                header: t('Doctor.MedicalSpecialtyName'),
+                header: t('Fields.MedicalSpecialtyName'),
                 accessor: 'MedicalSpecialtyName',
             },
             {
-                header: t('Doctor.DoctorStatusName'),
+                header: t('Fields.DoctorStatusName'),
                 accessor: 'DoctorStatusName',
             },
             {
-                header: t('Doctor.AddressLine'),
+                header: t('Fields.AddressLine'),
                 accessor: 'AddressLine',
             }
         ], []);

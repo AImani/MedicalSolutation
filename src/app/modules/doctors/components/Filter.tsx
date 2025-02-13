@@ -9,6 +9,7 @@ import { useEffect, useMemo, useState } from "react"
 import { useListView, useQueryRequest } from "@/_metronic/partials/controls/Table"
 import usePermission from '../../auth/permissions/hook';
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom"
 
 export const CartableFilter = () => {
     const methods = useFormContext();
@@ -92,9 +93,9 @@ export const CartableFilter = () => {
                                 </InputGroup>
                             </Col>
                             <Col xs={'auto'} className='pt-5 mt-2'>
-                                <Button type='button' variant='success' onClick={showApprove}>
+                                <Link type='button' className="btn btn-success" to='/doctors/create'>
                                     <KTIcon iconName='plus-square' iconType='solid' className='fs-2 me-2' /> {t('Actions.Add')}
-                                </Button>
+                                </Link>
                             </Col>
                         </Row>
                     </Card.Body>
