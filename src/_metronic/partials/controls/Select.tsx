@@ -4,7 +4,7 @@ import './styles/Select.css'
 import './styles/Select.scss'
 import { FloatLabel } from './'
 
-export const SelectField = ({ label, ...props }: any) => {
+export const SelectField = ({ label, noMessage = false, ...props }: any) => {
   const { control, getFieldState } = useFormContext()
 
   function getSelectStyles(multi: any, size = '') {
@@ -135,7 +135,7 @@ export const SelectField = ({ label, ...props }: any) => {
                       props.size ? `${props.size}` : '',
                     ].join(' ')}
                   />
-                  {getFieldState(props.name).invalid && (
+                  {!noMessage && getFieldState(props.name).invalid && (
                     <div className='invalid-feedback'>
                       {getFieldState(props.name)?.error?.message?.toString()}
                     </div>
@@ -180,7 +180,7 @@ export const SelectField = ({ label, ...props }: any) => {
             }}
           />
 
-          {getFieldState(props.name).invalid && (
+          {!noMessage && getFieldState(props.name).invalid && (
             <div className='invalid-feedback'>
               {getFieldState(props.name)?.error?.message?.toString()}
             </div>

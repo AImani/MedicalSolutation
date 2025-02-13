@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import { FloatLabel } from './';
 
 export const InputField: React.FC<any> = (
-  { feedbackStyle = {}, ltr = false, formatnumber = false, size = 'md', ...props }: any,
+  { feedbackStyle = {}, ltr = false, formatnumber = false, size = 'md', noMessage = false, ...props }: any,
   rules = {},
   errors = []
 ) => {
@@ -68,7 +68,7 @@ export const InputField: React.FC<any> = (
                       ? { value: getValues(props.name) }
                       : null)}
                     autoComplete='off'
-                    className={[controlSize, !!getError() && 'is-invalid', ltr && 'dir-ltr'].join(' ')}
+                    className={[controlSize, getFieldState(props.name).invalid && 'is-invalid', ltr && 'dir-ltr'].join(' ')}
                     onChange={(val) => {
                       if (props.type == 'file') {
                         props.onHandleChange && props.onHandleChange(val.target.files);
@@ -110,7 +110,7 @@ export const InputField: React.FC<any> = (
                     ? { value: getValues(props.name) }
                     : null)}
                   autoComplete='off'
-                  className={[controlSize, !!getError() && 'is-invalid', ltr && 'dir-ltr'].join(' ')}
+                  className={[controlSize, getFieldState(props.name).invalid && 'is-invalid', ltr && 'dir-ltr'].join(' ')}
                   onChange={(val) => {
                     if (props.type == 'file') {
                       props.onHandleChange && props.onHandleChange(val.target.files);
@@ -128,7 +128,7 @@ export const InputField: React.FC<any> = (
             }}
           />
 
-          {getFieldState(props.name).invalid && (
+          {!noMessage && getFieldState(props.name).invalid && (
             <div className='invalid-feedback' style={feedbackStyle}>
               {getFieldState(props.name)?.error?.message?.toString()}
             </div>
