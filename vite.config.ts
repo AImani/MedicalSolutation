@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
-import basicSsl from '@vitejs/plugin-basic-ssl'
 import path from 'path';
 
 
@@ -21,7 +20,7 @@ export default defineConfig({
   },
   server: {
     port: 44343,
-    https: { cert: './.cert/server.crt', key: './.cert/server.key' },
+    https: { cert: './.cert/localhost.pem', key: './.cert/localhost-key.pem' },
     // hmr: false,
     watch: {
       usePolling: true
