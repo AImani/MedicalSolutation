@@ -22,7 +22,7 @@ export const Create = ({ show, onHide, onCreate, onAction }: CreateModalProps) =
     const { mutateAsync, error } = onCreate();
 
     const validationSchema = yup.object({
-        Title: yup.string().required(t('Messages.Required', { 0: t('BasicInfo.Title') }))
+        Title: yup.string().required(t('Messages.Required', { 0: t('Fields.Title') }))
     });
 
 
@@ -72,7 +72,7 @@ export const Create = ({ show, onHide, onCreate, onAction }: CreateModalProps) =
                         <Modal.Title>{t('Actions.Create')}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <InputField name="Title" label={t('BasicInfo.Title')} />
+                        <InputField name="Title" label={t('Fields.Title')} />
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="danger" onClick={onHide}><i className="fas fa-ban"></i> {t('Actions.Cancel')}</Button>

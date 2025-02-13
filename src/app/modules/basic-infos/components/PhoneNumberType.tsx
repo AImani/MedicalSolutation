@@ -20,7 +20,7 @@ export const PhoneNumberTypes = () => {
     const [data, setData] = useState<BasicInfoDto>();
 
     const onAction = () => {
-        queryClient.invalidateQueries({ predicate: (query) => query.queryKey[0] === 'PhoneNumberTypees' });
+        queryClient.invalidateQueries({ predicate: (query) => query.queryKey[0] === 'PhoneNumberTypes' });
     }
 
     return (

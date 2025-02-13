@@ -44,7 +44,7 @@ export const List = ({ queryFn, queryKey, pageTitle, showModify, showDelete, sho
     const columns = useMemo<ColumnDef<BasicInfoDto, any>[]>(
         () => [
             {
-                header: () => t('BasicInfo.Title'),
+                header: () => t('Fields.Title'),
                 accessorKey: 'Title',
             },
             {

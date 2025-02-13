@@ -58,7 +58,7 @@ export const Delete = ({ show, onHide, onDelete, data, onAction }: DeleteModalPr
             </Modal.Header>
             <Modal.Body>
 
-                <label className="form-label">{t('BasicInfo.Title')}</label>
+                <label className="form-label">{t('Fields.Title')}</label>
                 <label className="form-control" >{data?.Title}</label>
             </Modal.Body>
             <Modal.Footer>
