@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-const CustomRating = ({ onChange }: any) => {
+export const CustomRating = ({ onChange }: any) => {
     const [rating, setRating] = useState<number | null>(null);
     const [hover, setHover] = useState<number | null>(null);
 
@@ -61,4 +61,3 @@ export const RatingWrapper = styled.aside`
     display: none;
   }
 `;
-export default CustomRating;
