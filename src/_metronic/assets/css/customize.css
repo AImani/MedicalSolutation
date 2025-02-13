@@ -42,3 +42,65 @@
 .table td:first-child {
   padding-right: .75rem !important;
 }
+
+@media (min-width: 1024px) {
+  .symbol.symbol-lg-180px > img {
+    width: 180px;
+    height: 180px;
+  }
+  .symbol.symbol-lg-180px .symbol-label {
+    width: 180px;
+    height: 180px;
+  }
+  .symbol.symbol-lg-180px.symbol-fixed .symbol-label {
+    width: 180px;
+    height: 180px;
+  }
+  .symbol.symbol-lg-180px.symbol-fixed > img {
+    width: 180px;
+    height: 180px;
+    max-width: none;
+  }
+  .symbol.symbol-lg-180px.symbol-2by3 .symbol-label {
+    height: 180px;
+    width: 270px;
+  }
+  .symbol.symbol-lg-200px.symbol-2by3 > img {
+    height: 180px;
+    width: 270px;
+    max-width: none;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .symbol.symbol-md-200px > img {
+    width: 200px;
+    height: 200px;
+  }
+  .symbol.symbol-md-200px .symbol-label {
+    width: 200px;
+    height: 200px;
+  }
+  .symbol.symbol-md-200px.symbol-fixed .symbol-label {
+    width: 200px;
+    height: 200px;
+  }
+  .symbol.symbol-md-200px.symbol-fixed > img {
+    width: 200px;
+    height: 200px;
+    max-width: none;
+  }
+  .symbol.symbol-md-200px.symbol-2by3 .symbol-label {
+    height: 200px;
+    width: 300px;
+  }
+  .symbol.symbol-md-200px.symbol-2by3 > img {
+    height: 200px;
+    width: 300px;
+    max-width: none;
+  }
+}
+
+.nav-line-tabs .nav-item .nav-link.active, .nav-line-tabs .nav-item.show .nav-link, .nav-line-tabs .nav-item .nav-link:hover:not(.disabled) {
+  color: var(--bs-text-primary) !important;
+}
