@@ -62,7 +62,7 @@ console.log("t('Modules.AppointmentRequest') > ", t('Modules.AppointmentRequest'
         <SidebarMenuItem to='/basic-info/appointment-statuses' title={t('BasicInfo.AppointmentStatus')} hasBullet={true}  />
         <SidebarMenuItem to='/basic-info/doctor-statuses' title={t('BasicInfo.DoctorStatus')} hasBullet={true}  />
         <SidebarMenuItem to='/basic-info/document-types' title={t('BasicInfo.DocumentType')} hasBullet={true}  />
-        <SidebarMenuItem to='/basic-info/education-levels' title={t('BasicInfo.Educationlevel')} hasBullet={true}  />
+        <SidebarMenuItem to='/basic-info/education-levels' title={t('BasicInfo.EducationLevel')} hasBullet={true}  />
         <SidebarMenuItem to='/basic-info/image-usage-types' title={t('BasicInfo.ImageUsageType')} hasBullet={true}  />
         <SidebarMenuItem to='/basic-info/marital-statuses' title={t('BasicInfo.MaritalStatus')} hasBullet={true}  />
         <SidebarMenuItem to='/basic-info/medical-specialties' title={t('BasicInfo.MedicalSpecialty')} hasBullet={true}  />

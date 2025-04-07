@@ -15,7 +15,7 @@ export const DatePickerField: React.FC<any> = (
   rules = {},
   errors = []
 ) => {
-  const { register, setValue, formState, getValues, getFieldState } = useFormContext();
+  const { setValue, getFieldState } = useFormContext();
   const [controlSize, setControlSize] = useState<string>('form-control');
   const [format, setFormat] = useState<string>(hasTime ? 'YYYY/MM/DD HH:mm' : 'YYYY/MM/DD');
   useEffect(() => { setFormat(hasTime ? 'YYYY/MM/DD HH:mm' : 'YYYY/MM/DD') }, [hasTime])
@@ -25,22 +25,7 @@ export const DatePickerField: React.FC<any> = (
       setControlSize(clsx('form-control', suffix))
     }
   }, [size]);
-  const objVal = () => EnToFaObjDate(getValues(props.name));
-  const getError = () => {
-    let parts = props.name.split('.');
 
-    if (parts.length == 1) {
-      return formState.errors[props.name];
-    } else return null;
-  };
-
-  const isInvalid = () => {
-    let parts = props.name.split('.');
-
-    if (parts.length == 1 && !!formState.errors[props.name]) {
-      return true;
-    } else return false;
-  };
 
   function CustomInput({ onFocus, value, onChange }: any) {
     return (
@@ -72,13 +57,11 @@ export const DatePickerField: React.FC<any> = (
                     value={(field.value && moment.from(field.value?.toString(), 'en', format).locale('fa').format(format)) || ""}
                     digits={['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']}
                     onChange={(date) => {
-                      console.log('date?.toString() > ', moment.from(date?.toString() || '', 'fa', format).locale('en').format(format));
                       field.onChange(date?.toString())
                       !!date?.toString() && setValue(props.name, moment.from(date?.toString(), 'fa', format).locale('en').format(format))
                       !!props.handleOnChange && props.handleOnChange(date?.isValid ? date : "");
                     }}
                     format={format}
-                    // render={renderCustomInputEndDate}
                     render={<CustomInput />}
                     containerClassName={clsx('form-control', getFieldState(props.name).invalid ? 'is-invalid' : '')}
                     {...(hasTime
@@ -100,12 +83,13 @@ export const DatePickerField: React.FC<any> = (
                   calendar={persian}
                   locale={fa}
                   digits={['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']}
-                  value={value || ""}
+                  value={(field.value && moment.from(field.value?.toString(), 'en').locale('fa').format(format)) || ""}
                   onChange={(date) => {
+                    !!date?.toString() && field.onChange(moment.from(date?.toString(), 'fa', format).locale('en').format(format))
+                    !!date?.toString() && setValue(props.name, moment.from(date?.toString(), 'fa', format).locale('en').format(format))
                     !!props.handleOnChange && props.handleOnChange(date?.isValid ? date : "");
                   }}
                   format={"YYYY/MM/DD"}
-                  // render={renderCustomInputEndDate}
                   render={<CustomInput />}
                   containerClassName={clsx('form-control', getFieldState(props.name).invalid ? 'is-invalid' : '')}
                   {...(hasTime
