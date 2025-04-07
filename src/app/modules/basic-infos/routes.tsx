@@ -13,7 +13,7 @@ import { PhoneNumberTypes } from './components/PhoneNumberType';
 import { MedicalSpecialties } from './components/MedicalSpecialty';
 import { MaritalStatuses } from './components/MaritalStatus';
 import { ImageUsageTypes } from './components/ImageUsageType';
-import { Educationlevels } from './components/Educationlevel';
+import { EducationLevels } from './components/EducationLevel';
 
 const BasicInfoRoutes: React.FC = () => {
   return (
@@ -24,7 +24,7 @@ const BasicInfoRoutes: React.FC = () => {
         <Route path='/appointment-statuses' Component={(props) => <AppointmentStatuses />} />
         <Route path='/doctor-statuses' Component={(props) => <DoctorStatuses />} />
         <Route path='/document-types' Component={(props) => <DocumentTypes />} />
-        <Route path='/education-levels' Component={(props) => <Educationlevels />} />
+        <Route path='/education-levels' Component={(props) => <EducationLevels />} />
         <Route path='/image-usage-types' Component={(props) => <ImageUsageTypes />} />
         <Route path='/marital-statuses' Component={(props) => <MaritalStatuses />} />
         <Route path='/medical-specialties' Component={(props) => <MedicalSpecialties />} />

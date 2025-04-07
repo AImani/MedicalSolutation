@@ -1,17 +1,17 @@
 import { useMutation, useQuery, UseQueryResult } from "@tanstack/react-query";
 import { ExceptionError, PaginateResult } from "../../general/@types";
-import { EducationlevelGridDto, EducationlevelRequestDto } from "../@types/EducationlevelDto";
+import { EducationLevelGridDto, EducationLevelRequestDto } from "../@types/EducationLevelDto";
 import axios from "axios";
 import { BasicInfoDto } from "../@types";
 
-const getGetAll = async (dto: EducationlevelRequestDto) => {
-    const response = await axios.post<PaginateResult<EducationlevelGridDto>>('/Educationlevel/GetAll', dto).then(response => response.data);
+const getGetAll = async (dto: EducationLevelRequestDto) => {
+    const response = await axios.post<PaginateResult<EducationLevelGridDto>>('/EducationLevel/GetAll', dto).then(response => response.data);
     return response;
 }
 
-export const useEducationlevels = (dto: EducationlevelRequestDto): UseQueryResult<PaginateResult<EducationlevelGridDto>, ExceptionError> => {
-    return useQuery<PaginateResult<EducationlevelGridDto>, ExceptionError>({
-        queryKey: ['Educationlevels', dto],
+export const useEducationLevels = (dto: EducationLevelRequestDto): UseQueryResult<PaginateResult<EducationLevelGridDto>, ExceptionError> => {
+    return useQuery<PaginateResult<EducationLevelGridDto>, ExceptionError>({
+        queryKey: ['EducationLevels', dto],
         queryFn: () => {
             return getGetAll(dto)
         },
@@ -19,27 +19,27 @@ export const useEducationlevels = (dto: EducationlevelRequestDto): UseQueryResul
     })
 }
 
-const updateEducationlevel = async (command: BasicInfoDto) => {
-    const { data } = await axios.put(`Educationlevel/${command.Id}`, { ...command });
+const updateEducationLevel = async (command: BasicInfoDto) => {
+    const { data } = await axios.put(`EducationLevel/${command.Id}`, { ...command });
     return data
 }
 
-export const mutUpdateEducationlevel = () =>
-    useMutation<void, ExceptionError, BasicInfoDto>({ mutationKey: ["updateEducationlevel"], mutationFn: updateEducationlevel })
+export const mutUpdateEducationLevel = () =>
+    useMutation<void, ExceptionError, BasicInfoDto>({ mutationKey: ["updateEducationLevel"], mutationFn: updateEducationLevel })
 
 
-const createEducationlevel = async (command: BasicInfoDto) => {
-    const { data } = await axios.post(`Educationlevel`, { ...command });
+const createEducationLevel = async (command: BasicInfoDto) => {
+    const { data } = await axios.post(`EducationLevel`, { ...command });
     return data
 }
 
-export const mutCreateEducationlevel = () =>
-    useMutation<void, ExceptionError, BasicInfoDto>({ mutationKey: ["createEducationlevel"], mutationFn: createEducationlevel })
+export const mutCreateEducationLevel = () =>
+    useMutation<void, ExceptionError, BasicInfoDto>({ mutationKey: ["createEducationLevel"], mutationFn: createEducationLevel })
 
-const deleteEducationlevel = async (id: number) => {
-    const { data } = await axios.delete(`Educationlevel/${id}`);
+const deleteEducationLevel = async (id: number) => {
+    const { data } = await axios.delete(`EducationLevel/${id}`);
     return data
 }
 
-export const mutDeleteEducationlevel = () =>
-    useMutation<void, ExceptionError, number>({ mutationKey: ["deleteEducationlevel"], mutationFn: deleteEducationlevel })
+export const mutDeleteEducationLevel = () =>
+    useMutation<void, ExceptionError, number>({ mutationKey: ["deleteEducationLevel"], mutationFn: deleteEducationLevel })

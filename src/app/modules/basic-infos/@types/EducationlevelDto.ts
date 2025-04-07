@@ -1,24 +1,24 @@
 import { BaseRequest } from "../../general/@types";
 
-export interface EducationlevelRequestDto extends BaseRequest {
+export interface EducationLevelRequestDto extends BaseRequest {
     Title: string | null;
 }
 
-export interface EducationlevelGridDto {
+export interface EducationLevelGridDto {
     Id: number;
     Title: string;
 }
 
-export interface EducationlevelDto {
+export interface EducationLevelDto {
     Id: number;
     Title: string;
 }
 
-export interface CreateEducationlevelDto {
+export interface CreateEducationLevelDto {
     Title: string;
 }
 
-export interface UpdateEducationlevelDto {
+export interface UpdateEducationLevelDto {
     Id: number;
     Title: string;
 }

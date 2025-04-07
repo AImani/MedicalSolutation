@@ -13,9 +13,10 @@ export const useCities = (dto: CityRequestDto): UseQueryResult<PaginateResult<Ci
     return useQuery<PaginateResult<CityGridDto>, ExceptionError>({
         queryKey: ['Cities', dto],
         queryFn: () => {
-            return getGetAll(dto)
+            return getGetAll({...dto, PageSize: 100})
         },
-        staleTime: 6 * 100000
+        staleTime: 6 * 100000,
+        enabled: !!dto.ProvinceId
     })
 }
 
