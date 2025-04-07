@@ -1,3 +1,5 @@
+import { CreateAppointmentDto } from "../../appointments/@types";
+import { AppointmentRequestStatusDto } from "../../basic-infos/@types";
 import { BaseRequest } from "../../general/@types";
 
 export interface AppointmentRequestRequestDto extends BaseRequest {
@@ -24,6 +26,7 @@ export interface AppointmentRequestDto {
     AppointmentTime: string;
     Description: string | null;
     AppointmentRequestStatusId: number;
+    AppointmentRequestStatus: AppointmentRequestStatusDto;
 }
 
 export interface CreateAppointmentRequestDto {
@@ -43,4 +46,9 @@ export interface UpdateAppointmentRequestDto {
     AppointmentTime: string;
     Description: string | null;
     AppointmentRequestStatusId: number;
+}
+
+export interface ApproveAppointmentRequestDto {
+    Id: number;
+    Appointment: CreateAppointmentDto
 }

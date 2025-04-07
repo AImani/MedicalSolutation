@@ -3,6 +3,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import moment from 'jalali-moment';
 import { Button, Table } from '@/_metronic/partials/controls';
 import { addDays } from '@/_metronic/helpers';
 import {
@@ -16,13 +17,26 @@ import { ToWords } from 'to-words';
 import { AppointmentRequestGridDto } from '../@types';
 import { useAppointmentRequests } from '../services/CoreService';
 import Loader from '@/_metronic/partials/layout/loader';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { View } from './View';
 
 export const AppointmentRequests = () => {
     const { t } = useTranslation();
+    const [show, setShow] = useState(false);
+    const [id, setId] = useState<number>();
+    const handleShow = (id: number) => {
+        setId(id);
+        setShow(true);
+    };
+    const handleHide = () => {
+        setId(undefined);
+        setShow(false);
+    }
+
     const validationSchema = yup.object({
-        ResponseFromDate: yup.date().required(t('Messages.Required', { 0: t('Financial.Report.ResponseFromDate') })),
-        ResponseToDate: yup.date().required(t('Messages.Required', { 0: t('Financial.Report.ResponseToDate') }))
+        FromDate: yup.date().required(t('Messages.Required', { 0: t('Financial.Report.ResponseFromDate') })),
+        ToDate: yup.date().required(t('Messages.Required', { 0: t('Financial.Report.ResponseToDate') }))
     });
 
     let fromDate = addDays(new Date(), -30);
@@ -34,9 +48,9 @@ export const AppointmentRequests = () => {
         defaultValues: {
             PageIndex: 0,
             PageSize: 10,
-            ResponseFromDate: fromDate,
-            ResponseToDate: toDate,
-            StatusId: null
+            FromDate: fromDate,
+            ToDate: toDate,
+            AppointmentRequestStatusId: null
         } as any,
         resolver: yupResolver(validationSchema)
     });
@@ -44,38 +58,47 @@ export const AppointmentRequests = () => {
         () => [
             {
                 header: t('AppointmentRequest.PatientName'),
-                accessor: 'PatientName'
+                accessorKey: 'PatientName'
             },
             {
                 header: t('AppointmentRequest.PhoneNumber'),
-                accessor: 'PhoneNumber'
-            },
-            {
-                header: t('AppointmentRequest.AppointmentDate'),
-                accessor: 'AppointmentDate',
-            },
-            {
-                header: t('AppointmentRequest.AppointmentTime'),
-                accessor: 'AppointmentTime',
+                accessorKey: 'PhoneNumber'
             },
             {
                 header: t('AppointmentRequest.AppointmentRequestStatus'),
-                accessor: 'AppointmentRequestStatus',
+                accessorKey: 'AppointmentRequestStatus',
+            },
+            {
+                header: t('AppointmentRequest.AppointmentDate'),
+                accessorKey: 'AppointmentDate',
+                cell: ({ cell }) => (
+                    <>
+                        {!!cell.getValue()
+                            ? moment
+                                .from(cell.getValue(), "en", "YYYY/MM/DD")
+                                .format('jYYYY/jMM/jDD')
+                            : ''}
+                    </>
+                ),
+            },
+            {
+                header: t('AppointmentRequest.AppointmentTime'),
+                accessorKey: 'AppointmentTime',
             },
             {
                 header: t('Actions.Operation'),
-                minWidth: 65,
-                accessor: 'Id',
+                minWidth: 50,
+                accessorKey: 'Id',
                 id: 'actions',
                 cell: ({ cell }) => (
                     <Button
                         className='btn btn-sm btn-info'
-
+                        onClick={() => handleShow(cell.getValue())}
                     >
-                        {true ? (
+                        {false ? (
                             <Loader isLoading={true} color='text-dark' />
                         ) : (
-                            t('Actions.Check')
+                            t('Actions.Show')
                         )}
                     </Button>
                 ),
@@ -105,6 +128,7 @@ export const AppointmentRequests = () => {
                     </QueryResponseProvider>
                 </QueryRequestProvider>
             </FormProvider>
+            <View show={show} onHide={handleHide} id={id} />
         </>
     );
 };
