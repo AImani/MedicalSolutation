@@ -6,7 +6,7 @@ import {
     SelectField
 } from '@/_metronic/partials/controls';
 import {
-    useEducationlevels,
+    useEducationLevels,
     useMaritalStatuses,
     useDoctorStatuses,
     useMedicalSpecialties

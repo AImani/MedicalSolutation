@@ -89,4 +89,7 @@ export interface IdentityUser {
   UserName: string | null;
   Email: string | null;
   PhoneNumber: string | null;
+  FirstName: string | null;
+  LastName: string | null;
+  FullName: string | null;
 }
