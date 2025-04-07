@@ -9,8 +9,8 @@ import { useForm, useFormContext, useWatch } from 'react-hook-form';
 export const Address: React.FC = () => {
     const { t } = useTranslation();
     const form = useFormContext()
-    const provinceId: number | undefined = useWatch({control: form.control, name: 'Fields.ProvinceId'})
-    const { data: provinces } = useProvinces({} as any);
+    const provinceId: number | undefined = useWatch({control: form.control, name: 'Address.ProvinceId'})
+    const { data: provinces } = useProvinces({PageSize: 100} as any);
     const { data: cities, refetch } = useCities({ ProvinceId: provinceId });
 
     useEffect(() => {

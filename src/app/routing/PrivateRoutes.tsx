@@ -11,6 +11,8 @@ import { AppointmentRequests } from '../modules/appointment-requests/components'
 import { Appointments } from '../modules/appointments/components/Appointments'
 import { InsuranceCompanies } from '../modules/insurance-companies/components/InsuranceCompanies'
 import BasicInfoRoutes from '../modules/basic-infos/routes'
+import AppointmentsRoutes from '../modules/appointments/routes'
+import AppointmentRequestsRoutes from '../modules/appointment-requests/routes'
 
 const PrivateRoutes = () => {
   return (
@@ -31,7 +33,7 @@ const PrivateRoutes = () => {
         />
         <Route
           path='appointment-requests/*'
-          element={<AppointmentRequests />}
+          element={<AppointmentRequestsRoutes />}
         />
         <Route
           path='insurance-companies/*'
