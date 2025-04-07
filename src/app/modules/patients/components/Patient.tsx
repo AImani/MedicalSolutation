@@ -6,7 +6,7 @@ import {
     SelectField
 } from '@/_metronic/partials/controls';
 import {
-    useEducationlevels,
+    useEducationLevels,
     useMaritalStatuses,
     usePatientStatuses
 } from '../../basic-infos/services';
@@ -19,7 +19,7 @@ import { ProfileImage } from '../../general/components/ProfileImage';
 const Patient: React.FC = () => {
     const { t } = useTranslation();
     const { data: patientStatuses } = usePatientStatuses({} as any);
-    const { data: educationleveles } = useEducationlevels({} as any);
+    const { data: educationleveles } = useEducationLevels({} as any);
     const { data: maritalStatuses } = useMaritalStatuses({} as any);
 
     return (
@@ -60,7 +60,7 @@ const Patient: React.FC = () => {
                     </Col>
                     <Col xl={4} lg={6} md={6} className='mb-1'>
                         <SelectField
-                            name="EducationlevelId"
+                            name="EducationLevelId"
                             label={t('Fields.EducationLevelName')}
                             options={educationleveles?.Data.Result.map(x => ({ label: x.Title, value: x.Id }))} />
                     </Col>

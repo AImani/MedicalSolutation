@@ -7,7 +7,8 @@ const addressSchema = yup.object<CreateAddressDto>().shape({
     FullAddress: yup.string().required('آدرس الزامی است').max(500, 'آدرس حداکثر ۵۰۰ کاراکتر'),
     ProvinceId: yup.number().required('استان الزامی است').typeError('استان باید عدد باشد'),
     CityId: yup.number().required('شهر الزامی است').typeError('شهر باید عدد باشد'),
-    PostalCode: yup.string().nullable().matches(/^\d{10}$/, 'کد پستی باید ۱۰ رقم باشد'),
+    PostalCode: yup.string().nullable().length(10, 'کدپستی باید 10 رقم باشد'),
+    //.matches(/^\d{10}$/, 'کد پستی باید ۱۰ رقم باشد'),
     ApartmentNo: yup.string().nullable().max(4, 'شماره آپارتمان حداکثر 4 کاراکتر'),
     UnitNo: yup.string().nullable().max(3, 'شماره واحد حداکثر 3 کاراکتر'),
 });

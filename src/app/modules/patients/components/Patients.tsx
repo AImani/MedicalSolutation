@@ -156,9 +156,9 @@ export const Patients = () => {
                     queryKey='Patients'
                 >
                     <QueryResponseProvider queryFn={usePatients} queryKey='Patients'>
-                        <ListViewProvider>
+                        <ListViewProvider isSelectable={true}>
                             <CartableFilter />
-                            <Table columns={columns} />
+                            <Table columns={columns}/>
                         </ListViewProvider>
                     </QueryResponseProvider>
                 </QueryRequestProvider>

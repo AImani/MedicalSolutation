@@ -11,17 +11,19 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { createPatientSchema } from "../services/SchemaValidation";
 import { PageTitle, useLayout } from "@/_metronic/layout/core";
 import { Address } from "../../general/components";
+import { mutCreatePatient } from "../services/PatientService";
 
 export const Create = () => {
     const { t } = useTranslation()
     const { setActions } = useLayout()
-
     const [activeTab, setActiveTab] = useState('ContantInfo');
+    const {mutateAsync: createAsync} = mutCreatePatient();
 
     const form = useForm<CreatePatientDto>({
         defaultValues: {
             FirstName: "مهرداد",
             LastName: "ایمانی",
+            BirthDate: new Date(),
             ContactInfo: {
                 Email: "test",
                 PhoneNumbers: [
@@ -32,8 +34,14 @@ export const Create = () => {
         resolver: yupResolver<any>(createPatientSchema)
     });
     const { errors } = form.formState;
-    const onSubmit = form.handleSubmit((values) => {
-        console.log(values)
+    console.log('errors > ', errors);
+    
+    const onSubmit = form.handleSubmit(async (values) => {
+        if(!!values.Address?.CityId == false){
+            values.Address = undefined;
+        }
+        console.log('onSubmit > ', values);
+        await createAsync(values)
     });
 
     setActions(
@@ -84,7 +92,7 @@ export const Create = () => {
                     <Card.Body>
                         {activeTab === 'ContantInfo' && <ContantInfo />}
                         {activeTab === 'Address' && <Address />}
-                        {activeTab === 'MedicalDocument' && <MedicalDocuments />}
+                        {activeTab === 'MedicalDocuments' && <MedicalDocuments />}
                     </Card.Body>
                 </Card>
             </Form>

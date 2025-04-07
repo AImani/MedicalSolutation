@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { ViewMedicalDocument, CreateMedicalDocument } from '../../general/components/MedicalDocument';
+import FileUploadDropzone from '../../general/components/MedicalDocument/FileUpload';
 
 export const MedicalDocuments: React.FC = () => {
     const [formData, setFormData] = useState({
@@ -27,13 +28,14 @@ export const MedicalDocuments: React.FC = () => {
     return (
         <Row>
             <Col xl={6} className='mb-5'>
-                <ViewMedicalDocument />
+            <FileUploadDropzone />
+                {/* <CreateMedicalDocument /> */}
             </Col>
             <Col xl={6} className='mb-5'>
                 <ViewMedicalDocument />
             </Col>
             <Col xl={6} className='mb-5'>
-                <CreateMedicalDocument />
+                <ViewMedicalDocument />
             </Col>
         </Row>
     );

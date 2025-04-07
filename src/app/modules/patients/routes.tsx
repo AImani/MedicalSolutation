@@ -5,6 +5,7 @@ import { Patients } from './components/Patients';
 import Patient from './components/Patient';
 import { Create } from './components/Create';
 import { Modify } from './components/Modify';
+import { View } from './components/View';
 
 const PatientsRoutes: React.FC = () => {
   return (
@@ -12,7 +13,7 @@ const PatientsRoutes: React.FC = () => {
       <Routes>
         <Route path='/' Component={(props) => <Patients />} />
         <Route path='/create' Component={(props) => <Create />} />
-        <Route path='/show/:id' Component={(props) => <Patient />} />
+        <Route path='/show/:id' Component={(props) => <View />} />
         <Route path='/edit/:id' Component={(props) => <Modify />} />
       </Routes>
     </Suspense>

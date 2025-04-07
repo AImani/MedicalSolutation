@@ -1,4 +1,6 @@
-import { CreateAddressDto, CreateMedicalDocumentDto } from "../../basic-infos/@types";
+import { AppointmentDto } from "../../appointments/@types";
+import { AddressDto, CreateAddressDto, CreateMedicalDocumentDto, EducationLevelDto, MaritalStatusDto, MedicalDocumentDto } from "../../basic-infos/@types";
+import { PatientStatusDto } from "../../basic-infos/@types";
 import { BaseRequest } from "../../general/@types";
 import { ContactInfoDto, CreateContactInfoDto } from "./BasicInfoDto";
 
@@ -28,6 +30,31 @@ export interface PatientGridDto {
     EducationLevelName: string;
     AddressLine: string;
     InsuranceCompanyName: string;
+}
+
+export interface PatientDto {
+    Id: number;
+    FirstName: string;
+    LastName: string;
+    ContactInfoId: number | null;
+    BirthDate: string;
+    Occupation: string;
+    IntroductionChannel: string;
+    ImageUrl: string;
+    PatientStatusId: number;
+    EducationLevelId: number | null;
+    MaritalStatusId: number | null;
+    AddressId: number | null;
+    ContactInfo: ContactInfoDto;
+    PatientStatus: PatientStatusDto;
+    EducationLevel: EducationLevelDto;
+    MaritalStatus: MaritalStatusDto;
+    Address?: AddressDto;
+    Appointments?: AppointmentDto[];
+    // VisitHistories: VisitHistoryDto[];
+    MedicalDocuments?: MedicalDocumentDto[];
+    // InsurancePolicies: InsurancePolicyDto[];
+    // Billings: BillingDto[];
 }
 
 export interface CreatePatientDto {
