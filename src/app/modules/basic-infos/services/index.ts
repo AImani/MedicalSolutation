@@ -1,6 +1,7 @@
 export * from './AppointmentPurposeService'
 export * from './AppointmentRequestStatusService'
 export * from './PatientStatusService'
+export * from './GroupStatusService'
 export * from './EducationLevelService'
 export * from './MaritalStatusService'
 export * from './CityService'

@@ -15,6 +15,7 @@ import { MaritalStatuses } from './components/MaritalStatus';
 import { ImageUsageTypes } from './components/ImageUsageType';
 import { EducationLevels } from './components/EducationLevel';
 
+
 const BasicInfoRoutes: React.FC = () => {
   return (
     <Suspense fallback={<LayoutSplashScreen />}>
