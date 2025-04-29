@@ -1,16 +1,16 @@
-import {Button, Card, Form} from 'react-bootstrap';
-import {useState} from 'react';
-import {useTranslation} from 'react-i18next';
-import {FormProvider, useForm} from 'react-hook-form';
-import {CreateMessageDto} from '../@types';
-import {Link} from 'react-router-dom';
-import {yupResolver} from '@hookform/resolvers/yup';
-import {createMessageSchema} from '../services/SchemaValidation';
-import {PageTitle, useLayout} from '@/_metronic/layout/core';
-import {mutCreateMessage} from '../services/MessageService';
-import {Row, Col} from 'react-bootstrap';
-import {DatePickerField} from '@/_metronic/partials/controls';
-import {TextAreaField, MultiSelectSearch} from '@/_metronic/partials/controls';
+import { Button, Card, Form } from 'react-bootstrap';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { FormProvider, useForm } from 'react-hook-form';
+import { CreateMessageDto } from '../@types';
+import { Link } from 'react-router-dom';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { createMessageSchema } from '../services/SchemaValidation';
+import { PageTitle, useLayout } from '@/_metronic/layout/core';
+import { mutCreateMessage } from '../services/MessageService';
+import { Row, Col } from 'react-bootstrap';
+import { DatePickerField } from '@/_metronic/partials/controls';
+import { TextAreaField } from '@/_metronic/partials/controls';
 
 export interface MultiSelectSearchOption {
   value: string | number;
@@ -18,10 +18,10 @@ export interface MultiSelectSearchOption {
 }
 
 export const SingleSendCreate = () => {
-  const {t} = useTranslation();
-  const {setActions} = useLayout();
+  const { t } = useTranslation();
+  const { setActions } = useLayout();
   const [activeTab, setActiveTab] = useState('Users');
-  const {mutateAsync: createAsync} = mutCreateMessage();
+  const { mutateAsync: createAsync } = mutCreateMessage();
 
   const form = useForm<CreateMessageDto>({
     defaultValues: {
@@ -29,7 +29,7 @@ export const SingleSendCreate = () => {
     },
     resolver: yupResolver<any>(createMessageSchema),
   });
-  const {errors} = form.formState;
+  const { errors } = form.formState;
   console.log('errors > ', errors);
 
   const onSubmit = form.handleSubmit(async (values) => {
@@ -48,16 +48,16 @@ export const SingleSendCreate = () => {
 
   const searchUsers = async (searchTerm: string): Promise<MultiSelectSearchOption[]> => {
     const allOptions = [
-      {value: '1', label: 'Option 1'},
-      {value: '2', label: 'Option 2'},
-      {value: '3', label: 'Option 3'},
-      {value: '4', label: 'Option 4'},
-      {value: '5', label: 'Option 5'},
-      {value: '6', label: 'Option 5'},
-      {value: '7', label: 'Option 5'},
-      {value: '8', label: 'Option 55555555555'},
-      {value: '9', label: 'Option 9'},
-      {value: '10', label: 'mamad'},
+      { value: '1', label: 'Option 1' },
+      { value: '2', label: 'Option 2' },
+      { value: '3', label: 'Option 3' },
+      { value: '4', label: 'Option 4' },
+      { value: '5', label: 'Option 5' },
+      { value: '6', label: 'Option 5' },
+      { value: '7', label: 'Option 5' },
+      { value: '8', label: 'Option 55555555555' },
+      { value: '9', label: 'Option 9' },
+      { value: '10', label: 'mamad' },
     ];
 
     return new Promise((resolve) => {
@@ -86,14 +86,7 @@ export const SingleSendCreate = () => {
               <Col>
                 <Row>
                   <Col xl={4} lg={6} md={6} className='mb-2 d-none d-sm-block'>
-                    <MultiSelectSearch
-                      name='Recipient'
-                      label={t('Fields.PatientName')}
-                      placeholder={t('SMSPanel.Search.User')}
-                      options={searchUsers}
-                      debounceTime={500}
-                      // maxSelections={1}
-                    />
+
                   </Col>
                 </Row>
                 <Row>

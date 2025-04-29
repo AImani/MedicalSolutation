@@ -12,34 +12,31 @@ import { createGroupSchema } from "../services/SchemaValidation";
 import { PageTitle, useLayout } from "@/_metronic/layout/core";
 import { Address } from "../../general/components";
 import { mutCreateGroup } from "../services/GroupService";
+import { usePatients } from "../../patients/services/PatientService";
 
 export const Create = () => {
     const { t } = useTranslation()
     const { setActions } = useLayout()
     const [activeTab, setActiveTab] = useState('Users');
     const { mutateAsync: createAsync } = mutCreateGroup();
+    const { data: patients } = usePatients({ PageSize: 0 } as any);
+    console.log("patients", patients);
 
     const form = useForm<CreateGroupDto>({
-        defaultValues: {
-            GroupName: "مهرداد",
-        },
         resolver: yupResolver<any>(createGroupSchema)
     });
     const { errors } = form.formState;
     console.log('errors > ', errors);
 
     const onSubmit = form.handleSubmit(async (values) => {
-        if (!!values.Address?.CityId == false) {
-            values.Address = undefined;
-        }
         console.log('onSubmit > ', values);
         await createAsync(values)
     });
 
     setActions(
         [
-            <Link className="btn btn-sm btn-secondary" to="/sms-panel/groups"><i className="fas fa-arrow-right">
-            </i> {t('Actions.Cancel')}
+            <Link className="btn btn-sm btn-secondary" to="/sms-panel/groups">
+                <i className="fas fa-arrow-right"></i> {t('Actions.Cancel')}
             </Link>,
             <Button variant="success" size="sm" onClick={onSubmit}>
                 <i className='fas fa-check'></i> {t('Actions.Save')}
@@ -62,27 +59,12 @@ export const Create = () => {
                             <Nav.Item className="pt-2">
                                 <Nav.Link eventKey="Users">{t('User.Plural')}</Nav.Link>
                             </Nav.Item>
-                            {/* <Nav.Item className="pt-2">
-                                <Nav.Link eventKey="Address">{t('Address.Singular')}</Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item className="pt-2">
-                                <Nav.Link eventKey="MedicalDocuments">{t('MedicalDocument.Plural')}</Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item className="pt-2">
-                                <Nav.Link eventKey="Appointments">{t('Appointment.Plural')}</Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item className="pt-2">
-                                <Nav.Link eventKey="VisitHistories">{t('VisitHistory.Plural')}</Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item className="pt-2">
-                                <Nav.Link eventKey="Bills">{t('Bill.Plural')}</Nav.Link>
-                            </Nav.Item> */}
                         </Nav>
                     </Card.Body>
                 </Card>
                 <Card className="mt-5">
                     <Card.Body>
-                        {activeTab === 'Users' && <User />}
+                        {activeTab === 'Users' && <User patients={patients?.Data.Result} />}
                     </Card.Body>
                 </Card>
             </Form>

@@ -5,7 +5,7 @@ import { CreateGroupDto, GroupDto, GroupRequestDto, UpdateGroupDto } from "../@t
 import { GroupGridDto } from "../@types";
 
 const getGetAll = async (dto: GroupRequestDto) => {
-    const response = await axios.post<PaginateResult<GroupGridDto>>('/Group/GetAll', dto).then(response => response.data);
+    const response = await axios.post<PaginateResult<GroupGridDto>>('/SmsGroup/GetAll', dto).then(response => response.data);
     return response;
 }
 
@@ -20,13 +20,13 @@ export const useGroups = (dto: GroupRequestDto): UseQueryResult<PaginateResult<G
 }
 
 const getById = async (id?: number) => {
-    const response = await axios.get<Result<GroupDto>>(`/Group/${id}`).then(response => response.data);
+    const response = await axios.get<Result<GroupDto>>(`/SmsGroup/${id}`).then(response => response.data);
     return response;
 }
 
 export const useGroup = (id?: number): UseQueryResult<Result<GroupDto>, ExceptionError> => {
     return useQuery<Result<GroupDto>, ExceptionError>({
-        queryKey: ['Group', id],
+        queryKey: ['SmsGroup', id],
         queryFn: () => {
             return getById(id)
         },
@@ -36,26 +36,28 @@ export const useGroup = (id?: number): UseQueryResult<Result<GroupDto>, Exceptio
 }
 
 const updateGroup = async (command: UpdateGroupDto) => {
-    const { data } = await axios.put(`Group/${command.Id}`, { ...command });
+    const { data } = await axios.put(`SmsGroup/${command.Id}`, { ...command });
     return data
 }
 
 export const mutUpdateGroup = () =>
-    useMutation<void, ExceptionError, UpdateGroupDto>({ mutationKey: ["UpdateGroup"], mutationFn: updateGroup })
+    useMutation<void, ExceptionError, UpdateGroupDto>({ mutationKey: ["UpdateSmsGroup"], mutationFn: updateGroup })
 
 
 const createGroup = async (command: CreateGroupDto) => {
-    const { data } = await axios.post(`Group`, { ...command });
+    console.log('command', command)
+    const { data } = await axios.post(`SmsGroup`, { ...command });
     return data
 }
 
 export const mutCreateGroup = () =>
-    useMutation<void, ExceptionError, CreateGroupDto>({ mutationKey: ["CreateGroup"], mutationFn: createGroup })
+    // useMutation<void, ExceptionError, CreateGroupDto>({ mutationKey: ["CreateSmsGroup"], mutationFn: createGroup })
+    useMutation<void, ExceptionError, CreateGroupDto>({ mutationKey: ["CreateSmsGroup"], mutationFn: () => { console.log("function called") } })
 
 const deleteGroup = async (id: number) => {
-    const { data } = await axios.delete(`Group/${id}`);
+    const { data } = await axios.delete(`SmsGroup/${id}`);
     return data
 }
 
 export const mutDeleteGroup = () =>
-    useMutation<void, ExceptionError, number>({ mutationKey: ["deleteGroup"], mutationFn: deleteGroup })
+    useMutation<void, ExceptionError, number>({ mutationKey: ["DeleteSmsGroup"], mutationFn: deleteGroup })
