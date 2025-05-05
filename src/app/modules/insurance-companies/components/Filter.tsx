@@ -1,5 +1,5 @@
 import { KTIcon } from "@/_metronic/helpers"
-import { SelectField, DatePickerField } from "@/_metronic/partials/controls"
+import { SelectField, DatePickerField, InputField } from "@/_metronic/partials/controls"
 import { t } from "i18next"
 import { Card, Row, Col, InputGroup, Button, Form } from "react-bootstrap"
 import { useFormContext } from "react-hook-form"
@@ -12,53 +12,17 @@ import { toast } from "react-toastify";
 
 export const CartableFilter = () => {
     const methods = useFormContext();
-    const canWaitingForApprove = usePermission([{ ctrl: 'FinancialTransfers', action: 'WaitingForApprove' }]);
-    const canApprove = usePermission([{ ctrl: 'FinancialTransfers', action: 'Approve' }]);
-    const canReject = usePermission([{ ctrl: 'FinancialTransfers', action: 'Reject' }]);
-
-    const { data: statuses } = useStatuses();
-    const [selectableStatuses, setSelectableStatuses] = useState<any[]>([]);
-    useEffect(() => {
-        setSelectableStatuses([]);
-        if (canWaitingForApprove || canApprove || canReject)
-            setSelectableStatuses([{ value: null, label: 'همه' }]);
-        if (canWaitingForApprove)
-            setSelectableStatuses((prev) => [...prev, { value: 1, label: 'ثبت اولیه' }]);
-        if (canApprove || canReject)
-            setSelectableStatuses((prev) => [...prev, { value: 2, label: 'در انتظار تایید' }]);
-    }, [statuses]);
 
     const queryClient = useQueryClient();
     const queryRequest = useQueryRequest();
     const { state, updateState } = useMemo(() => ({ state: queryRequest?.state, updateState: queryRequest?.updateState }), [queryRequest]);
     const listView = useListView();
-    const [confirmReject, setConfirmReject] = useState<boolean>(false);
-    const [confirmApprove, setConfirmApprove] = useState<boolean>(false);
-    const [confirmWaitingForApprove, setConfirmWaitingForApprove] = useState<boolean>(false);
 
-    const showReject = () => {
-        if (listView?.selected.length == 0)
-            toast.error('درخواستی انتخاب نشده است.');
-        else
-            setConfirmReject(true)
-    };
-    const showApprove = () => {
-        if (listView?.selected.length == 0)
-            toast.error('درخواستی انتخاب نشده است.');
-        else
-            setConfirmApprove(true);
-    };
-    const showWaitingForApprove = () => {
-        if (listView?.selected.length == 0)
-            toast.error('درخواستی انتخاب نشده است.');
-        else
-            setConfirmWaitingForApprove(true);
-    };
 
     const onSubmit = methods.handleSubmit((values) => {
         methods.trigger(['ResponseFromDate', 'ResponseToDate'])
             .then((res) => {
-                queryClient.invalidateQueries({ predicate: (query) => query.queryKey[0] === 'FinancialTransfers' })
+                queryClient.invalidateQueries({ predicate: (query) => query.queryKey[0] === 'InsuranceCompanies' })
                     .finally(() => res && !!updateState && updateState({ ...state, ...values }));
             })
     })
@@ -70,18 +34,13 @@ export const CartableFilter = () => {
                     <Card.Body className='p-5'>
                         <Row className='w-100 my-3 mx-0 me-auto'>
                             <Col md={6} lg={3} xl={2}>
-                                <SelectField
-                                    name='StatusId'
-                                    options={selectableStatuses}
-                                    label={t('Financial.Report.Succeeded')}
-                                />
+                                <InputField name='Name' label={t('InsuranceCompany.Name')}/>
                             </Col>
                             <Col md={6} lg={3} xl={2}>
-                                <DatePickerField name='ResponseFromDate' label={t('Financial.Report.RequestFromDate')}
-                                />
+                                <InputField name='PhoneNumber' label={t('InsuranceCompany.PhoneNumber')}/>
                             </Col>
                             <Col md={6} lg={3} xl={2}>
-                                <DatePickerField name='ResponseToDate' label={t('Financial.Report.RequestToDate')} />
+                                <InputField name='Email' label={t('InsuranceCompany.Email')}/>
                             </Col>
                             <Col className='pe-0 pt-4 mt-2'>
                                 <InputGroup size='sm'>
@@ -90,11 +49,6 @@ export const CartableFilter = () => {
                                         {t('Actions.Search')}
                                     </Button>
                                 </InputGroup>
-                            </Col>
-                            <Col xs={'auto'} className='pt-5 mt-2'>
-                                <Button type='button' variant='success' onClick={showApprove}>
-                                    <KTIcon iconName='plus-square' iconType='solid' className='fs-2 me-2' /> {t('Actions.Add')}
-                                </Button>
                             </Col>
                         </Row>
                     </Card.Body>

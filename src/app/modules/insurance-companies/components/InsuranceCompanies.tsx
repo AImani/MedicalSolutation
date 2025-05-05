@@ -9,25 +9,39 @@ import {
     QueryRequestProvider,
     QueryResponseProvider,
 } from '@/_metronic/partials/controls/Table';
-import { PageTitle } from '@/_metronic/layout/core';
+import { PageTitle, useLayout } from '@/_metronic/layout/core';
 import { CartableFilter } from './Filter';
 import { ToWords } from 'to-words';
 import { InsuranceCompanyGridDto } from '../@types';
 import { useInsuranceCompanies } from '../services/InsuranceCompanyService';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { ColumnDef } from '@tanstack/react-table';
+import { Link } from 'react-router-dom';
+import Loader from '@/_metronic/partials/layout/loader';
 
 export const InsuranceCompanies = () => {
-    const { t } = useTranslation();
-    const towards = new ToWords({
-        localeCode: 'fa-IR',
-        converterOptions: {
-            currency: true,
-            ignoreDecimal: true,
-            ignoreZeroCurrency: true,
-            doNotAddOnly: false,
-        },
-    });
+    const { t } = useTranslation()
+    const [showFilter, setShowFilter] = useState(true)
+    const { setActions } = useLayout()
+    setActions(
+        [
+            <button
+                className='btn btn-sm fw-bold btn-secondary'
+                onClick={() => setShowFilter((_prev) => !_prev)}
+
+            >
+                <i className='fas fa-filter'></i>
+                {t('Actions.Filter')}
+            </button>,
+            <Link
+                to='/insurance-companies/create'
+                className='btn btn-sm fw-bold btn-primary'
+            >
+                <i className='fas fa-plus'></i>
+                {t('Actions.Create')}
+            </Link>,
+        ]
+    )
 
     const validationSchema = yup.object({
         ResponseFromDate: yup.date().required(t('Messages.Required', { 0: t('Financial.Report.ResponseFromDate') })),
@@ -54,15 +68,33 @@ export const InsuranceCompanies = () => {
         () => [
             {
                 header: t('InsuranceCompany.Name'),
-                accessor: 'Name'
-            },
-            {
-                header: t('InsuranceCompany.Email'),
-                accessor: 'Email'
+                accessorKey: 'Name'
             },
             {
                 header: t('InsuranceCompany.PhoneNumber'),
-                accessor: 'PhoneNumber',
+                accessorKey: 'PhoneNumber',
+            },
+            {
+                header: t('InsuranceCompany.Email'),
+                accessorKey: 'Email'
+            },
+            {
+                header: t('Actions.Operation'),
+                minWidth: 50,
+                accessorKey: 'Id',
+                id: 'actions',
+                cell: ({ cell }) => (
+                    <Link
+                        className='btn btn-sm btn-info'
+                        to={`/insurance-companies/show/${cell.getValue()}`}
+                    >
+                        {false ? (
+                            <Loader isLoading={true} color='text-dark' />
+                        ) : (
+                            t('Actions.Show')
+                        )}
+                    </Link>
+                ),
             }
         ], []);
 
@@ -83,7 +115,7 @@ export const InsuranceCompanies = () => {
                 >
                     <QueryResponseProvider queryFn={useInsuranceCompanies} queryKey='InsuranceCompanies'>
                         <ListViewProvider>
-                            <CartableFilter />
+                            {showFilter && <CartableFilter />}
                             <Table columns={columns} />
                         </ListViewProvider>
                     </QueryResponseProvider>
