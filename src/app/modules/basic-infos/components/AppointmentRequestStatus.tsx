@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next"
-import { Create, Delete, List, Modify, View } from "./general"
+import { Create, Delete, Filter, List, Modify, View } from "./general"
 import {
     useAppointmentRequestStatuses,
     mutUpdateAppointmentRequestStatus,
@@ -16,6 +16,7 @@ export const AppointmentRequestStatuses = () => {
     const [showModify, setShowModify] = useState(false);
     const [showCreate, setShowCreate] = useState(false);
     const [showDelete, setShowDelete] = useState(false);
+    const [showFilter, setShowFilter] = useState(false);
     const [showView, setShowView] = useState(false);
     const [data, setData] = useState<BasicInfoDto>();
 
@@ -45,10 +46,15 @@ export const AppointmentRequestStatuses = () => {
                     setData(data);
                     setShowCreate(true);
                 }}
+                showFilter={(data: BasicInfoDto) => {
+                    setData(data);
+                    setShowFilter(true);
+                }}
             />
             <Create show={showCreate} onHide={() => setShowCreate(false)} onCreate={mutCreateAppointmentRequestStatus} onAction={onAction} />
             <Modify show={showModify} onHide={() => setShowModify(false)} onModify={mutUpdateAppointmentRequestStatus} onAction={onAction} data={data} />
             <Delete show={showDelete} onHide={() => setShowDelete(false)} onDelete={mutDeleteAppointmentRequestStatus} onAction={onAction} data={data} />
+            <Filter show={showFilter} onHide={() => setShowFilter(false)} onFilter={useAppointmentRequestStatuses} onAction={onAction} />
             <View show={showView} onHide={() => setShowView(false)} data={data} />
         </>
     )

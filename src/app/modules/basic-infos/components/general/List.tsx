@@ -18,22 +18,23 @@ export interface ListProps {
     showDelete: Function,
     showView: Function,
     showCreate: Function,
+    showFilter: Function,
 };
 
-export const List = ({ queryFn, queryKey, pageTitle, showModify, showDelete, showView, showCreate }: ListProps) => {
+export const List = ({ queryFn, queryKey, pageTitle, ...dialog }: ListProps) => {
     const { t } = useTranslation();
     const { setActions } = useLayout()
     setActions(
         [
             <button
-                onClick={() => showCreate()}
+                onClick={() => dialog.showFilter()}
                 className='btn btn-sm fw-bold btn-secondary'
             >
                 <i className='fas fa-filter'></i>
                 {t('Actions.Filter')}
             </button>,
             <button
-                onClick={() => showCreate()}
+                onClick={() => dialog.showCreate()}
                 className='btn btn-sm fw-bold btn-primary'
             >
                 <i className='fas fa-plus'></i>
@@ -54,9 +55,9 @@ export const List = ({ queryFn, queryKey, pageTitle, showModify, showDelete, sho
                 id: 'actions',
                 cell: ({ cell }) => (
                     <>
-                        <button className='btn btn-sm btn-info me-1' onClick={() => showView(cell.row.original)}><i className='fas fa-eye p-0'></i></button>
-                        <button className='btn btn-sm btn-danger me-1' onClick={() => showDelete(cell.row.original)}><i className='fas fa-trash-alt p-0'></i></button>
-                        <button className='btn btn-sm btn-primary' onClick={() => showModify(cell.row.original)}><i className='fas fa-pen p-0'></i></button>
+                        <button className='btn btn-sm btn-info me-1' onClick={() => dialog.showView(cell.row.original)}><i className='fas fa-eye p-0'></i></button>
+                        <button className='btn btn-sm btn-danger me-1' onClick={() => dialog.showDelete(cell.row.original)}><i className='fas fa-trash-alt p-0'></i></button>
+                        <button className='btn btn-sm btn-primary' onClick={() => dialog.showModify(cell.row.original)}><i className='fas fa-pen p-0'></i></button>
                     </>
                 ),
             }
