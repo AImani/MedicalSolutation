@@ -13,6 +13,8 @@ import { InsuranceCompanies } from '../modules/insurance-companies/components/In
 import BasicInfoRoutes from '../modules/basic-infos/routes'
 import AppointmentsRoutes from '../modules/appointments/routes'
 import AppointmentRequestsRoutes from '../modules/appointment-requests/routes'
+import InsuranceCompaniesRoutes from '../modules/insurance-companies/routes'
+import SmsPanelRoutes from '../modules/sms-panel/routes'
 
 const PrivateRoutes = () => {
   return (
@@ -37,11 +39,15 @@ const PrivateRoutes = () => {
         />
         <Route
           path='insurance-companies/*'
-          element={<InsuranceCompanies />}
+          element={<InsuranceCompaniesRoutes />}
         />
         <Route
           path='appointments/*'
           element={<Appointments />}
+        />
+        <Route
+          path='sms-panel/*'
+          element={<SmsPanelRoutes />}
         />
         <Route
           path='basic-info/*'
