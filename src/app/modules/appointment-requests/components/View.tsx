@@ -1,13 +1,10 @@
 import { Col, InputGroup, Modal, Row } from "react-bootstrap"
 import { useTranslation } from "react-i18next";
-import { useForm } from "react-hook-form";
-import { AppointmentRequestDto } from "../@types";
-import { Link, useParams } from "react-router-dom";
-import { useLayout } from "@/_metronic/layout/core";
 import { useAppointmentRequest } from "../services/CoreService";
 import moment from 'jalali-moment';
-import { Button, TextAreaField, UsageOption, UsageSelector } from "@/_metronic/partials/controls";
+import { Button, UsageOption, UsageSelector } from "@/_metronic/partials/controls";
 import { useState } from "react";
+import { QuickAppointment } from "../../appointments/components/QuickAppointment";
 
 export interface ViewModalProps {
     show: boolean;
@@ -92,22 +89,23 @@ export const View = ({ show, onHide, id }: ViewModalProps) => {
                         />
                     </Col>
                     <Col md={12}>
+                        {status === '1' && (
+                            <QuickAppointment />
+                        )}
                         {status === '2' && (<>
-                            <label>دلیل رد</label>
-                            <textarea className="form-control" name="Description" />
+                            <label htmlFor="Description">دلیل رد</label>
+                            <textarea className="form-control" id="Description" name="Description" />
                         </>)}
                         {status === '3' && (<>
-                            <label>دلیل لغو</label>
-                            <textarea className="form-control" name="Description" />
+                            <label htmlFor="Description">دلیل لغو</label>
+                            <textarea className="form-control" id="Description" name="Description" />
                         </>)}
                     </Col>
                 </Row>
             </Modal.Body>
             <Modal.Footer>
                 <InputGroup className="w-100">
-                    <Button className="btn btn-success">تایید و ایجاد نوبت</Button>
-                    <Button className="btn btn-danger">رد نوبت</Button>
-                    <Button className="btn btn-warning">لغو توسط بیمار</Button>
+                    <Button className="btn btn-success">{t('Actions.Ok')}</Button>
                     <Button className="btn btn-secondary" onClick={onHide}>{t('Actions.Close')}</Button>
                 </InputGroup>
             </Modal.Footer>

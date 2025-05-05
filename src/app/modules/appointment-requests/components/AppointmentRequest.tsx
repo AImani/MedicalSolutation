@@ -1,20 +1,7 @@
-import { Row, Col, InputGroup } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import {
-    DatePickerField,
-    InputField,
-    SelectField
-} from '@/_metronic/partials/controls';
-import {
-    useEducationLevels,
-    useMaritalStatuses,
-    useAppointmentRequestStatuses
-} from '../../basic-infos/services';
-import { useState } from 'react';
-import { useFormContext } from 'react-hook-form';
-import { useDropzone } from 'react-dropzone';
-import { url } from 'inspector';
-import { ProfileImage } from '../../general/components/ProfileImage';
+import { DatePickerField, InputField, SelectField } from '@/_metronic/partials/controls';
+import { useAppointmentRequestStatuses } from '../../basic-infos/services';
 
 const AppointmentRequest: React.FC = () => {
     const { t } = useTranslation();

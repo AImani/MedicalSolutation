@@ -1,4 +1,5 @@
-import { Column, ColumnDef } from '@tanstack/react-table';
+import { useMemo, useState } from 'react';
+import { ColumnDef } from '@tanstack/react-table';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -11,20 +12,30 @@ import {
     QueryRequestProvider,
     QueryResponseProvider,
 } from '@/_metronic/partials/controls/Table';
-import { PageTitle } from '@/_metronic/layout/core';
-import { CartableFilter } from './Filter';
-import { ToWords } from 'to-words';
-import { AppointmentRequestGridDto } from '../@types';
-import { useAppointmentRequests } from '../services/CoreService';
+import { PageTitle, useLayout } from '@/_metronic/layout/core';
 import Loader from '@/_metronic/partials/layout/loader';
-import { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { View } from './View';
+import { AppointmentRequestGridDto } from '../@types';
+import { useAppointmentRequests } from '../services';
+import { CartableFilter, View } from '.';
 
 export const AppointmentRequests = () => {
     const { t } = useTranslation();
     const [show, setShow] = useState(false);
+    const [showFilter, setShowFilter] = useState(true);
     const [id, setId] = useState<number>();
+    const { setActions } = useLayout()
+    setActions(
+        [
+            <button
+                className='btn btn-sm fw-bold btn-secondary'
+                onClick={()=>setShowFilter((_prev) => !_prev)}
+            >
+                <i className='fas fa-filter'></i>
+                {t('Actions.Filter')}
+            </button>
+        ]
+    );
+
     const handleShow = (id: number) => {
         setId(id);
         setShow(true);
@@ -39,9 +50,9 @@ export const AppointmentRequests = () => {
         ToDate: yup.date().required(t('Messages.Required', { 0: t('Financial.Report.ResponseToDate') }))
     });
 
-    let fromDate = addDays(new Date(), -30);
+    let fromDate = addDays(new Date(), -15);
     fromDate.setHours(0, 0, 0, 0)
-    let toDate = new Date()
+    let toDate = addDays(new Date(), 15);
     toDate.setHours(23, 59, 59);
 
     const methods = useForm({
@@ -122,7 +133,7 @@ export const AppointmentRequests = () => {
                 >
                     <QueryResponseProvider queryFn={useAppointmentRequests} queryKey='AppointmentRequests'>
                         <ListViewProvider>
-                            <CartableFilter />
+                            {showFilter && <CartableFilter />}
                             <Table columns={columns} />
                         </ListViewProvider>
                     </QueryResponseProvider>

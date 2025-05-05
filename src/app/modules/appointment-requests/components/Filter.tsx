@@ -2,7 +2,7 @@ import { KTIcon } from "@/_metronic/helpers"
 import { SelectField, DatePickerField, InputField } from "@/_metronic/partials/controls"
 import { t } from "i18next"
 import { Card, Row, Col, InputGroup, Button, Form } from "react-bootstrap"
-import { FormProvider, useFormContext } from "react-hook-form"
+import { useFormContext } from "react-hook-form"
 import { useQueryClient } from "@tanstack/react-query"
 import { useQueryRequest } from "@/_metronic/partials/controls/Table"
 import { useAppointmentRequestStatuses } from "../../basic-infos/services"
@@ -30,25 +30,23 @@ export const CartableFilter = () => {
                 <Form className='form form-label-right' onSubmit={onSubmit}>
                     <Card.Body className='p-5'>
                         <Row className='w-100 my-3 mx-0 me-auto'>
-                            <Col md={6} lg={3} xl={3}>
+                            <Col md={6} lg={3} xl={3} xxl={2}>
                                 <SelectField
                                     name='AppointmentRequestStatusId'
                                     options={statuses?.Data.Result.map(x => ({ value: x.Id, label: x.Title }))}
                                     label={t('Fields.AppointmentRequestStatus')}
                                 />
                             </Col>
-                            <Col md={6} lg={3} xl={3}>
+                            <Col md={6} lg={3} xl={3} xxl={2}>
                                 <InputField name='PatientName' label={t('Fields.PatientName')} />
                             </Col>
-                            <Col md={6} lg={3} xl={3}>
+                            <Col md={6} lg={3} xl={3} xxl={2}>
                                 <InputField name='PhoneNumber' label={t('Fields.PhoneNumber')} />
                             </Col>
-                        </Row>
-                        <Row className='w-100 my-3 mx-0 me-auto'>
-                            <Col md={6} lg={3} xl={3}>
+                            <Col md={6} lg={3} xl={3} xxl={2}>
                                 <DatePickerField name='FromDate' label={t('Fields.FromDate')} />
                             </Col>
-                            <Col md={6} lg={3} xl={3}>
+                            <Col md={6} lg={3} xl={3} xxl={2}>
                                 <DatePickerField name='ToDate' label={t('Fields.ToDate')} />
                             </Col>
                             <Col className='pe-0 pt-4 mt-2'>
