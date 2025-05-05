@@ -31,7 +31,7 @@ export const Create = () => {
                 ]
             }
         },
-        resolver: yupResolver<any>(createPatientSchema)
+        resolver: yupResolver(createPatientSchema)
     });
     const { errors } = form.formState;
     console.log('errors > ', errors);

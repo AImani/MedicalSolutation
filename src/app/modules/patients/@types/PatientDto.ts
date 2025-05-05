@@ -67,7 +67,6 @@ export interface CreatePatientDto {
     MaritalStatusId?: number | null;
     EducationLevelId?: number | null;
     InsuranceCompanyId?: number | null;
-    
     Address?: CreateAddressDto;
     ContactInfo?: CreateContactInfoDto;
     MedicalDocuments?: CreateMedicalDocumentDto[];

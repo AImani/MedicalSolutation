@@ -12,7 +12,7 @@ export interface ContactInfoDto {
 }
 
 export interface CreateContactInfoDto {
-    Email: string | null;
+    Email?: string;
     PatientId: number;
     PhoneNumbers: CreatePhoneNumberDto[];
 }
